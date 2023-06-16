@@ -151,11 +151,11 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-briefcase"></i>
-                            <p>Orders</p>
+                            <p>Замовлення</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('barber.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-user-tie"></i>
                             <p>Барбери</p>
                         </a>
@@ -168,62 +168,38 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-th-list"></i>
-                            <p>Groups</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tags"></i>
-                            <p>Tags</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-palette"></i>
-                            <p>Colors</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>Users</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-clipboard"></i>
+                            <i class="nav-icon fas fa-cut"></i>
                             <p>
-                                Blog
+                                Послуги
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview" style="display: none;">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('service.index') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Posts</p>
+                                    <p>Всі послуги</p>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a href="pages/tables/data.html" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>Categories</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/tables/jsgrid.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Comments</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/tables/jsgrid.html" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Likes</p>
+                                    <p>Послуги барберів</p>
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-coins"></i>
+                            <p>Ціни та час</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('rank.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-award"></i>
+                            <p>Ранги</p>
+                        </a>
                     </li>
                 </ul>
             </nav>

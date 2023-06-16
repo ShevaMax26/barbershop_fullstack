@@ -10,4 +10,23 @@ class Barber extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $fillable = [
+        'name',
+        'surname',
+        'phone',
+        'rank_id',
+        'branch_id',
+        'image',
+    ];
+    protected static $unguarded = false;
+
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
 }
