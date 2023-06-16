@@ -6,6 +6,7 @@ use App\Http\Controllers\Barber;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\Rank;
 use App\Http\Controllers\Service;
+use App\Http\Controllers\ServiceDetail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,8 +61,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::patch('/{service}', Service\UpdateController::class)->name('service.update');
         Route::delete('/{service}', Service\DestroyController::class)->name('service.destroy');
     });
+    Route::group(['prefix' => 'service-details'], function () {
+        Route::get('/', ServiceDetail\IndexController::class)->name('service-detail.index');
+        Route::get('/create', ServiceDetail\CreateController::class)->name('service-detail.create');
+        Route::post('/', ServiceDetail\StoreController::class)->name('service-detail.store');
+        Route::get('/{serviceDetail}', ServiceDetail\ShowController::class)->name('service-detail.show');
+        Route::get('/{serviceDetail}/edit', ServiceDetail\EditController::class)->name('service-detail.edit');
+        Route::patch('/{serviceDetail}', ServiceDetail\UpdateController::class)->name('service-detail.update');
+        Route::delete('/{serviceDetail}', ServiceDetail\DestroyController::class)->name('service-detail.destroy');
+    });
 });
-
 
 
 Auth::routes();

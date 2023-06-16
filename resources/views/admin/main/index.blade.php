@@ -27,12 +27,12 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>150</h3>
-                            <p>Orders</p>
+                            <p>Замовлення</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-briefcase"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -46,7 +46,7 @@
                         <div class="icon">
                             <i class="fas fa-tshirt"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -55,12 +55,12 @@
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>44</h3>
-                            <p>Users</p>
+                            <p>Барбери</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -74,7 +74,7 @@
                         <div class="icon">
                             <i class="fas fa-comment-dots"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">Детальніше <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

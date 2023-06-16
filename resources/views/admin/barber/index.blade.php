@@ -51,7 +51,7 @@
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-7">
-                                            <h2 class="lead"><b>{{ $barber->name . ' ' . $barber->surname }}</b></h2>
+                                            <h2 class="lead"><b>{{ $barber->fullName }}</b></h2>
                                             <p class="text-muted text-sm"><b>Відгуки: </b>
                                                 <i class="fas fa-star" style="color: #ffcb00;"></i>
                                                 <i class="fas fa-star" style="color: #ffcb00;"></i>
@@ -70,7 +70,7 @@
                                             </ul>
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="{{ $barber->image ? asset('storage/' . $barber->image) : asset('/5.png') }}" alt="{{ $barber->name . ' ' . $barber->surname }}" style="width: 128px; height: 128px;"
+                                            <img src="{{ $barber->image ? asset('storage/' . $barber->image) : asset('/5.png') }}" alt="{{ $barber->fullName }}" style="width: 128px; height: 128px;"
                                                  class="img-circle img-fluid">
                                         </div>
                                     </div>

@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $barbers = Barber::orderByDesc('rank_id')->get();
+        $barbers = Barber::with(['rank', 'branch'])->orderByDesc('rank_id')->get();
 
         return view('admin.barber.index', compact('barbers'));
     }

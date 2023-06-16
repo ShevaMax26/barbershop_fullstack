@@ -29,4 +29,9 @@ class Barber extends Model
     {
         return $this->belongsTo(Branch::class);
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 }

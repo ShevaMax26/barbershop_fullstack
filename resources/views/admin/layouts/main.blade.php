@@ -128,7 +128,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link">
+        <a href="{{ route('main.index') }}" class="brand-link">
             <i class="fab fa-laravel ml-3 mr-2" style="color: #ca1616;"></i>
             <span class="brand-text font-weight-light">Laravel-shop</span>
         </a>
@@ -182,15 +182,42 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/tables/data.html" class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Послуги барберів</p>
+                                    <i class="fas fa-angle-left right"></i>
                                 </a>
+                                <ul class="nav nav-treeview ml-2" style="display: none;">
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link">
+                                            <i class="far fa-circle nav-icon text-warning"></i>
+                                            <p>ТОП-барбер</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/tables/data.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon text-danger"></i>
+                                            <p>Старший барбер</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/tables/data.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon text-success"></i>
+                                            <p>Барбер</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/tables/data.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon text-blue"></i>
+                                            <p>Стажер</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('service-detail.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-coins"></i>
                             <p>Ціни та час</p>
                         </a>
@@ -251,8 +278,7 @@
     $(function () {
         bsCustomFileInput.init();
     });
-    $('.tags').select2()
-    $('.colors').select2()
+    $('.select2').select2()
 
     $(document).ready(function() {
         $('#summernote').summernote({

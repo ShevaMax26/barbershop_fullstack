@@ -15,4 +15,9 @@ class Rank extends Model
     {
         return $this->hasMany(Barber::class);
     }
+
+    public function serviceDetails()
+    {
+        return $this->hasMany(ServiceDetail::class);
+    }
 }
