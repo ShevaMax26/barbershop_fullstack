@@ -63,8 +63,10 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::group(['prefix' => 'service-details'], function () {
         Route::get('/', ServiceDetail\IndexController::class)->name('service-detail.index');
-        Route::get('/create', ServiceDetail\CreateController::class)->name('service-detail.create');
-        Route::post('/', ServiceDetail\StoreController::class)->name('service-detail.store');
+//        Route::get('/create', ServiceDetail\CreateController::class)->name('service-detail.create');
+        Route::get('/create/{rank}', ServiceDetail\CreateController::class)->name('service-detail.create');
+//        Route::post('/', ServiceDetail\StoreController::class)->name('service-detail.store');
+        Route::post('/{rank}', ServiceDetail\StoreController::class)->name('service-detail.store');
         Route::get('/{serviceDetail}', ServiceDetail\ShowController::class)->name('service-detail.show');
         Route::get('/{serviceDetail}/edit', ServiceDetail\EditController::class)->name('service-detail.edit');
         Route::patch('/{serviceDetail}', ServiceDetail\UpdateController::class)->name('service-detail.update');

@@ -29,7 +29,11 @@ class ServiceDetail extends Model
         $minutes = $this->duration % 60;
 
         if ($hours > 0) {
-            return $hours . ' год. ' . $minutes . ' хв.';
+            if ($minutes > 0) {
+                return $hours . ' год. ' . $minutes . ' хв.';
+            } else {
+                return $hours . ' год.';
+            }
         } else {
             return $minutes . ' хв.';
         }

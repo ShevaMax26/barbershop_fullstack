@@ -25,7 +25,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <a href="{{ route('service-detail.create') }}" class="btn btn-primary">Додати</a>
+                            @foreach($ranks as $rank)
+                                <a href="{{ route('service-detail.create', $rank->id) }}" class="btn btn-primary mr-2">Додати {{ $rank->title }}</a>
+                            @endforeach
                             <div class="card-tools ml-auto">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -37,12 +39,11 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-body table-responsive p-0" style="height: calc(100vh - 266px);">
                             <table class="table table-head-fixed text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>№</th>
                                     <th>Ранг</th>
                                     <th>Послуга</th>
                                     <th>Час</th>
@@ -53,14 +54,13 @@
                                 <tbody>
                                 @foreach($serviceDetails as $serviceDetail)
                                     <tr>
-                                        <td>{{ $serviceDetail->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $serviceDetail->rank->title }}</td>
                                         <td>{{ $serviceDetail->service->title }}</td>
                                         <td>{{ $serviceDetail->formattedDuration }}</td>
                                         <td>{{ $serviceDetail->price }} грн</td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('service-detail.show', $serviceDetail->id) }}"><i class="far fa-eye mr-3"></i></a>
                                                 <a href="{{ route('service-detail.edit', $serviceDetail->id) }}"><i class="fas fa-pen text-warning mr-3"></i></a>
                                                 <form action="{{ route('service-detail.destroy', $serviceDetail->id) }}" method="post">
                                                     @csrf

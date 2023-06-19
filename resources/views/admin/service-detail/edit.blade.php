@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Редагування філії</h1>
+                    <h1 class="m-0">Редагування</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,13 +22,26 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <form action="{{ route('branch.update', $branch->id) }}" method="post" class="w-25">
+                <form action="{{ route('service-detail.update', $serviceDetail->id) }}" method="post" class="w-25">
                     @csrf
                     @method('patch')
-                    <input type="text" name="title" value="{{ $branch->title }}" class="form-control mb-3" placeholder="Назва">
+                    <div class="form-group">
+                        <label>Час, хв:</label>
+                        <input type="number" value="{{ $serviceDetail->duration }}" name="duration" class="form-control" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Ціна, грн:</label>
+                        <input type="number" value="{{ $serviceDetail->price }}" name="price" class="form-control" min="0">
+                    </div>
                     <div class="d-flex align-items-center">
                         <button type="submit" class="btn btn-warning">Update</button>
-                        <a href="{{ route('branch.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                        <a href="{{ route('service-detail.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" value="{{ $serviceDetail->rank_id }}" name="rank_id">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" value="{{ $serviceDetail->service_id }}" name="service_id">
                     </div>
                 </form>
             </div>

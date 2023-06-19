@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 
 class CreateController extends Controller
 {
-    public function __invoke()
+    public function __invoke(Rank $rank)
     {
-        $ranks = Rank::all();
-        $services = Service::all();
+//        $services = Service::all();
 
-        return view('admin.service-detail.create', compact('ranks', 'services'));
+        $services = Service::whereDoesntHave('serviceDetails', function ($query) use ($rank) {
+            $query->where('rank_id', $rank->id);
+        })->get();
+
+        return view('admin.service-detail.create', compact('rank', 'services'));
     }
 }
