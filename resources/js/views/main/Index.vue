@@ -655,10 +655,25 @@
 export default {
     name: "Index",
 
+    data() {
+        return {
+            serviceDetails: [],
+        }
+    },
+
     mounted() {
-        this.initializeTabFunctionality();
+        this.getProducts()
+        this.initializeTabFunctionality()
     },
     methods: {
+        getProducts() {
+            this.axios.get('/api/')
+                .then(res => {
+                    this.serviceDetails = res.data.data
+                    console.log(res);
+                })
+        },
+
         initializeTabFunctionality() {
             const filterBtns = document.querySelectorAll("[data-filter-btn]");
             const filterItems = document.querySelectorAll("[data-filter]");
