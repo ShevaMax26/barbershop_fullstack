@@ -13,7 +13,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $serviceDetails = ServiceDetail::orderBy('rank_id', 'asc')->get();;
+        $serviceDetails = ServiceDetail::with(['rank', 'service'])->orderBy('rank_id', 'asc')->get();;
         $ranks = Rank::all();
         return view('admin.service-detail.index', compact('serviceDetails', 'ranks'));
     }

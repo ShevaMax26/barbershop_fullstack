@@ -6,6 +6,7 @@ use App\Http\Controllers\Barber;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\Rank;
 use App\Http\Controllers\Service;
+use App\Http\Controllers\Order;
 use App\Http\Controllers\ServiceDetail;
 use Illuminate\Support\Facades\Route;
 
@@ -63,14 +64,21 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::group(['prefix' => 'service-details'], function () {
         Route::get('/', ServiceDetail\IndexController::class)->name('service-detail.index');
-//        Route::get('/create', ServiceDetail\CreateController::class)->name('service-detail.create');
         Route::get('/create/{rank}', ServiceDetail\CreateController::class)->name('service-detail.create');
-//        Route::post('/', ServiceDetail\StoreController::class)->name('service-detail.store');
         Route::post('/{rank}', ServiceDetail\StoreController::class)->name('service-detail.store');
         Route::get('/{serviceDetail}', ServiceDetail\ShowController::class)->name('service-detail.show');
         Route::get('/{serviceDetail}/edit', ServiceDetail\EditController::class)->name('service-detail.edit');
         Route::patch('/{serviceDetail}', ServiceDetail\UpdateController::class)->name('service-detail.update');
         Route::delete('/{serviceDetail}', ServiceDetail\DestroyController::class)->name('service-detail.destroy');
+    });
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', Order\IndexController::class)->name('order.index');
+        Route::get('/create', Order\CreateController::class)->name('order.create');
+        Route::post('/', Order\StoreController::class)->name('order.store');
+//        Route::get('/{order}', Order\ShowController::class)->name('order.show');
+        Route::get('/{order}/edit', Order\EditController::class)->name('order.edit');
+        Route::patch('/{order}', Order\UpdateController::class)->name('order.update');
+//        Route::delete('/{order}', Order\DestroyController::class)->name('order.destroy');
     });
 });
 
