@@ -205,238 +205,32 @@
                     </p>
 
                     <div class="pricing-tab-container">
-
                         <ul class="tab-filter">
-
-                            <li>
-                                <button class="filter-btn active" data-filter-btn="all">
+                            <li v-for="serviceDetail in serviceDetails" :key="serviceDetail.id" @click="selectRank(serviceDetail.id)">
+                                <button :class="{'filter-btn': true, 'active': serviceDetail.id === selectedRankId}">
                                     <div class="btn-icon">
                                         <i class="flaticon-beauty-salon" aria-hidden="true"></i>
                                     </div>
-
-                                    <p class="btn-text">All Pricing</p>
+                                    <p class="btn-text">{{ serviceDetail.title }}</p>
                                 </button>
                             </li>
-
-                            <li>
-                                <button class="filter-btn" data-filter-btn="beauty-spa">
-                                    <div class="btn-icon">
-                                        <i class="flaticon-relax" aria-hidden="true"></i>
-                                    </div>
-
-                                    <p class="btn-text">Beauty & Spa</p>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn" data-filter-btn="body-treatments">
-                                    <div class="btn-icon">
-                                        <i class="flaticon-massage" aria-hidden="true"></i>
-                                    </div>
-
-                                    <p class="btn-text">Body Treatments</p>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn" data-filter-btn="face-washing">
-                                    <div class="btn-icon">
-                                        <i class="flaticon-spa" aria-hidden="true"></i>
-                                    </div>
-
-                                    <p class="btn-text">Face Washing</p>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn" data-filter-btn="meditations">
-                                    <div class="btn-icon">
-                                        <i class="flaticon-yoga" aria-hidden="true"></i>
-                                    </div>
-
-                                    <p class="btn-text">Meditations</p>
-                                </button>
-                            </li>
-
-                            <li>
-                                <button class="filter-btn" data-filter-btn="shaving">
-                                    <div class="btn-icon">
-                                        <i class="flaticon-razor-blade" aria-hidden="true"></i>
-                                    </div>
-
-                                    <p class="btn-text">Shaving</p>
-                                </button>
-                            </li>
-
                         </ul>
 
                         <ul class="grid-list">
-
-                            <li data-filter="shaving">
+                            <li data-filter="meditations" v-for="service in selectedRankServices" :key="service.id">
                                 <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-1.jpg" width="90" height="90"
-                                             alt="Hair Cutting & Fitting"
-                                             class="img-cover">
-
-                                    </figure>
-
                                     <div class="wrapper">
-                                        <h3 class="h3 card-title">Hair Cutting & Fitting</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
+                                        <h3 class="h3 card-title">{{ service.service.title }}</h3>
+                                        <p class="card-text">{{ service.service.description }}</p>
                                     </div>
-
-                                    <data class="card-price" value="89">$89</data>
-
+                                    <div>
+                                        <data class="card-price" :value="service.price" style="line-height: 1">{{ service.price }}₴</data>
+                                        <span style="font-size: 13px; margin-top: 5px">{{ formatDuration(service.duration) }}</span>
+                                    </div>
                                 </div>
                             </li>
-
-                            <li data-filter="shaving">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-2.jpg" width="90" height="90"
-                                             alt="Shaving & Facial"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Shaving & Facial</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="45">$45</data>
-
-                                </div>
-                            </li>
-
-                            <li data-filter="face-washing">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-3.jpg" width="90" height="90"
-                                             alt="Hair Color & Wash"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Hair Color & Wash</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="35">$35</data>
-
-                                </div>
-                            </li>
-
-                            <li data-filter="body-treatments">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-4.jpg" width="90" height="90"
-                                             alt="Body Massage"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Body Massage</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="56">$56</data>
-
-                                </div>
-                            </li>
-
-                            <li data-filter="beauty-spa">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-5.jpg" width="90" height="90"
-                                             alt="Beauty & Spa"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Beauty & Spa</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="27">$27</data>
-
-                                </div>
-                            </li>
-
-                            <li data-filter="face-washing">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-6.jpg" width="90" height="90"
-                                             alt="Facial & Face Wash"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Facial & Face Wash</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="63">$63</data>
-
-                                </div>
-                            </li>
-
-                            <li data-filter="body-treatments">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-7.jpg" width="90" height="90"
-                                             alt="Backbone Massage"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Backbone Massage</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="43">$43</data>
-
-                                </div>
-                            </li>
-
-                            <li data-filter="meditations">
-                                <div class="pricing-card">
-
-                                    <figure class="card-banner img-holder" style="--width: 90; --height: 90;">
-                                        <img src="/assets/images/pricing-8.jpg" width="90" height="90"
-                                             alt="Meditation & Massage"
-                                             class="img-cover">
-                                    </figure>
-
-                                    <div class="wrapper">
-                                        <h3 class="h3 card-title">Meditation & Massage</h3>
-
-                                        <p class="card-text">Clean & simple 30-40 minutes</p>
-                                    </div>
-
-                                    <data class="card-price" value="74">$74</data>
-
-                                </div>
-                            </li>
-
                         </ul>
-
                     </div>
-
                 </div>
             </section>
 
@@ -658,53 +452,64 @@ export default {
     data() {
         return {
             serviceDetails: [],
-        }
+            selectedRankId: null,
+        };
+    },
+
+    computed: {
+        selectedRankServices() {
+            if (this.selectedRankId === null) {
+                return [];
+            }
+            const selectedRank = this.serviceDetails.find(serviceDetail => serviceDetail.id === this.selectedRankId);
+            return selectedRank ? selectedRank.serviceDetails : [];
+        },
     },
 
     mounted() {
-        this.getProducts()
-        this.initializeTabFunctionality()
+        this.getServices();
     },
+
     methods: {
-        getProducts() {
+        getServices() {
             this.axios.get('/api/')
-                .then(res => {
-                    this.serviceDetails = res.data.data
-                    console.log(res);
-                })
-        },
-
-        initializeTabFunctionality() {
-            const filterBtns = document.querySelectorAll("[data-filter-btn]");
-            const filterItems = document.querySelectorAll("[data-filter]");
-            let lastClickedFilterBtn = filterBtns[0];
-
-            const filter = function () {
-                lastClickedFilterBtn.classList.remove("active");
-                this.classList.add("active");
-                lastClickedFilterBtn = this;
-
-                for (let i = 0; i < filterItems.length; i++) {
-                    if (
-                        this.dataset.filterBtn === filterItems[i].dataset.filter ||
-                        this.dataset.filterBtn === "all"
-                    ) {
-                        filterItems[i].style.display = "block";
-                        filterItems[i].classList.add("active");
-                    } else {
-                        filterItems[i].style.display = "none";
-                        filterItems[i].classList.remove("active");
+                .then((res) => {
+                    this.serviceDetails = res.data.data;
+                    console.log(this.serviceDetails);
+                    if (this.serviceDetails.length > 0) {
+                        this.selectedRankId = this.serviceDetails[0].id;
                     }
-                }
-            };
-
-            filterBtns.forEach((btn) => btn.addEventListener("click", filter));
+                });
         },
+
+        selectRank(rankId) {
+            this.selectedRankId = rankId;
+        },
+
+        formatDuration(duration) {
+            if (duration < 60) {
+                return `${duration}хв.`;
+            } else {
+                const hours = Math.floor(duration / 60);
+                const minutes = duration % 60;
+                if (minutes === 0) {
+                    return `${hours}год.`;
+                } else {
+                    return `${hours}год. ${minutes}хв.`;
+                }
+            }
+        }
     },
 }
 
 </script>
 
 <style scoped>
-
+    .pricing-card {
+        align-items: flex-start;
+    }
+    .card-text {
+        font-size: 15px;
+        line-height: 18px;
+    }
 </style>
