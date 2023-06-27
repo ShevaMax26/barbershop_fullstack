@@ -11,6 +11,7 @@ class IndexController extends Controller
     public function __invoke()
     {
         $orders = Order::with(['branch', 'barber'])->get();
+
         return view('admin.order.index', compact('orders'));
     }
 }

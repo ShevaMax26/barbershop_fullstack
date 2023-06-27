@@ -7,11 +7,11 @@ use App\Http\Resources\RankServiceDetail\RankServiceDetailResource;
 use App\Models\Rank;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class RankServiceController extends Controller
 {
     public function __invoke()
     {
-        $ranks = Rank::all();
+        $ranks = Rank::with(['serviceDetails.service'])->get();
 
         return RankServiceDetailResource::collection($ranks);
     }

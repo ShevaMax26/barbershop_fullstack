@@ -472,10 +472,9 @@ export default {
 
     methods: {
         getServices() {
-            this.axios.get('/api/')
+            this.axios.get('/api/rank-services')
                 .then((res) => {
                     this.serviceDetails = res.data.data;
-                    console.log(this.serviceDetails);
                     if (this.serviceDetails.length > 0) {
                         this.selectedRankId = this.serviceDetails[0].id;
                     }

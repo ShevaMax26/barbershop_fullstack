@@ -18,7 +18,6 @@ class Order extends Model
         'customer_name',
         'customer_phone',
         'payment_status',
-        'total_price',
     ];
     protected static $unguarded = false;
 

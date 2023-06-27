@@ -81,9 +81,6 @@
                             <div>{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <input type="hidden" name="total_price" value="1000">
-                        </div>
                         <div class="d-flex align-items-center">
                             <button type="submit" class="btn btn-success">Створити</button>
                             <a href="{{ route('order.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>

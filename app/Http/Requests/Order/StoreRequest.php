@@ -29,7 +29,6 @@ class StoreRequest extends FormRequest
             'scheduled_time' => 'required|date',
             'customer_name' => 'required|string',
             'customer_phone' => 'required|integer',
-            'total_price' => 'required|integer',
             'services' => 'required|array',
         ];
     }

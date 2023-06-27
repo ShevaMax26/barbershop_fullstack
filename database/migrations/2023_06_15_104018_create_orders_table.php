@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('customer_name');
             $table->integer('customer_phone');
             $table->unsignedSmallInteger('payment_status')->default(1);
-            $table->integer('total_price');
             $table->timestamps();
             $table->softDeletes();
         });

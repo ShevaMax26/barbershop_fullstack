@@ -30,7 +30,6 @@ class UpdateRequest extends FormRequest
             'customer_name' => 'required|string',
             'customer_phone' => 'required|integer',
             'payment_status' => 'required|integer',
-            'total_price' => 'required|integer',
             'services' => 'required|array',
         ];
     }
