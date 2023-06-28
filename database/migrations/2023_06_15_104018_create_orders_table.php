@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate()
                 ->nullable();
-            $table->dateTime('scheduled_time');
+            $table->date('scheduled_date');
             $table->string('customer_name');
             $table->integer('customer_phone');
             $table->unsignedSmallInteger('payment_status')->default(1);

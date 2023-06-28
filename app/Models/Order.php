@@ -14,7 +14,7 @@ class Order extends Model
     protected $fillable = [
         'branch_id',
         'barber_id',
-        'scheduled_time',
+        'scheduled_date',
         'customer_name',
         'customer_phone',
         'payment_status',

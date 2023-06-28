@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Rank;
+namespace App\Http\Controllers\API\RankService;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RankServiceDetail\RankServiceDetailResource;

@@ -478,6 +478,7 @@ export default {
                     if (this.serviceDetails.length > 0) {
                         this.selectedRankId = this.serviceDetails[0].id;
                     }
+                    console.log(this.serviceDetails);
                 });
         },
 

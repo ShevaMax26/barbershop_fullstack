@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API\Service;
+namespace App\Http\Controllers\API\ServiceDetail;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ServiceDetail\ServiceDetailResource;
