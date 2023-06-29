@@ -25,6 +25,8 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate()
                 ->nullable();
+            $table->integer('duration');
+            $table->integer('price');
             $table->timestamps();
         });
     }

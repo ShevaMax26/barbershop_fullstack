@@ -14,13 +14,13 @@
                     </select>
                     <select v-model="selectedServices" multiple class="input-field">
                         <option value="" disabled>Виберіть послуги</option>
-                        <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн)' }}</option>
+                        <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
                     </select>
                 </div>
 
                 <div class="input-wrapper input-flex">
                     <input v-model="date" type="date" name="date" required class="input-field date">
-                    <input v-model="time" type="time" name="time" required class="input-field date">
+                    <input v-model="start" type="time" name="start" required class="input-field date">
                 </div>
                 <div class="hr"></div>
                 <div class="input-wrapper">
@@ -52,7 +52,7 @@ export default {
             selectedBarberRank: '',
             selectedServices: [],
             date: '',
-            time: '',
+            start: '',
             name: '',
             phone: '',
         }
@@ -90,16 +90,15 @@ export default {
         appointment() {
             console.log(this.selectedServices);
             this.axios.post('/api/orders', {
-                'branch_id': this.selectedBranch,
+                'rank_id': this.selectedBarberRank,
                 'services': this.selectedServices,
                 'customer_name': this.name,
                 'customer_phone': this.phone,
-                'scheduled_date': this.date,
-                'start_time': this.time,
+                'date': this.date,
+                'start': this.start,
             })
                 .then(res => {
-                    console.log(res);
-                    console.log('Замовлення успішно створено');
+                    alert(res.data.data.customer_name + ', Замовлення успішно створено');
                 })
                 .catch(error => {
                     console.error('Помилка при створенні замовлення', error);

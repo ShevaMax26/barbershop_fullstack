@@ -22,7 +22,7 @@
     <section class="content">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <a href="{{ route('order.create') }}" class="btn btn-primary mr-2">Додати</a>
+                <a href="{{ route('order.create') }}" class="btn btn-primary mr-2">Створити</a>
                 <div class="card-tools ml-auto">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -40,9 +40,6 @@
                     <tr>
                         <th style="width: 2%">
                             ID
-                        </th>
-                        <th style="width: 10%">
-                            Створено
                         </th>
                         <th style="width: 10%">
                             Клієнт
@@ -70,7 +67,6 @@
                         <a href="#">
                             <tr>
                                 <td>{{ $order->id }}</td>
-                                <td>{{ $order->created_at->format('d.m.Y') }}</td>
                                 <td>
                                     <span>
                                         {{ $order->customer_name }}
@@ -80,7 +76,7 @@
                                         0{{ $order->customer_phone }}
                                     </small>
                                 </td>
-                                <td>{{ str_replace('GC barbershop ', '', $order->branch->title) }}</td>
+                                <td>{{ str_replace('GC barbershop ', '', $order->barber->branch->title) }}</td>
                                 <td>
                                     <ul class="list-inline">
                                         <a href="{{ route('barber.show', $order->barber->id) }}">
@@ -102,11 +98,11 @@
                                         </div>
                                     </div>
                                     <span>
-                                    {{ $order->created_at->format('d F Y о H:i') }}
+                                    {{ $order->formatted_start_time }}
                                 </span>
                                 </td>
                                 <td class="project-state">
-                                    <span class="badge badge-warning" style="font-size: 16px; height: 30px; width: 75px;">{{ $order->total_price }} грн</span>
+                                    <span class="badge badge-warning" style="font-size: 16px; height: 30px; width: 75px;">{{ $order->getTotalAmount() }} грн</span>
                                 </td>
                                 <td>
                                     <a class="btn btn-primary d-flex align-items-center justify-content-center" href="#">

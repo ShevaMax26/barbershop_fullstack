@@ -23,6 +23,11 @@ class ServiceDetail extends Model
         return $this->belongsTo(Service::class);
     }
 
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function getFormattedDurationAttribute(): string
     {
         $hours = floor($this->duration / 60);

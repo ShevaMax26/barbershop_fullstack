@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,12 +13,13 @@ class Order extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'branch_id',
         'barber_id',
-        'scheduled_date',
+        'date',
+        'start',
+        'end',
         'customer_name',
         'customer_phone',
-        'payment_status',
+        'status',
     ];
     protected static $unguarded = false;
 
@@ -33,6 +35,22 @@ class Order extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'order_services');
+        return $this->belongsToMany(Service::class, 'order_services', 'order_id', 'service_id')
+            ->withPivot('price', 'duration');
+    }
+
+    public function getTotalAmount()
+    {
+        return $this->services->sum(function ($service) {
+            return $service->pivot->price;
+        });
+    }
+
+    public function getFormattedStartTimeAttribute()
+    {
+        $date = Carbon::parse($this->date)->setTimeFromTimeString($this->start);
+        $date->locale('uk');
+
+        return $date->isoFormat('D MMMM H:mm');
     }
 }

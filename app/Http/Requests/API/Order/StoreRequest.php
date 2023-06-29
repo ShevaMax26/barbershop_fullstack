@@ -24,14 +24,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'branch_id' => 'nullable|integer',
+            'rank_id' => 'nullable|integer',
             'services' => 'nullable|array',
             'customer_name' => 'nullable|string',
             'customer_phone' => 'nullable|integer',
-            'scheduled_date' => 'nullable',
-            'start_time' => 'nullable',
-            'end_time' => 'nullable',
-            'is_available' => 'nullable|boolean',
+            'date' => 'nullable',
+            'start' => 'nullable',
         ];
     }
 }

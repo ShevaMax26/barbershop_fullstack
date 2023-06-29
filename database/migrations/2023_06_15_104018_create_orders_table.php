@@ -10,20 +10,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Branch::class)
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate()
-                ->nullable();
             $table->foreignIdFor(\App\Models\Barber::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate()
                 ->nullable();
-            $table->date('scheduled_date');
+            $table->date('date');
+            $table->time('start');
+            $table->time('end');
             $table->string('customer_name');
             $table->integer('customer_phone');
-            $table->unsignedSmallInteger('payment_status')->default(1);
+            $table->unsignedSmallInteger('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

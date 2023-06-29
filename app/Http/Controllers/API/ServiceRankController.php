@@ -12,7 +12,8 @@ class ServiceRankController extends Controller
 {
     public function __invoke(Rank $rank)
     {
-        $services = $rank->serviceDetails()->with('service')->orderBy('service_id', 'asc')->get();;
+        $services = $rank->serviceDetails()->with('service')->orderBy('service_id', 'asc')->get();
+
         return ServiceRankResource::collection($services);
     }
 }
