@@ -3,25 +3,28 @@
              style="background-image: url('/assets/images/hero-banner.jpg')">
         <div class="container">
             <form action="" class="appoin-form " style="width: 600px; margin: 0 auto 0 auto">
-                <div class="input-wrapper">
-                    <select v-model="selectedBranch" @change="updateBarbers" class="input-field">
-                        <option value="">Вибрати філію</option>
-                        <option v-for="branch in branches" :value="branch.id">{{ branch.title }}</option>
-                    </select>
-                    <select v-model="selectedBarberRank" @change="getServices" class="input-field">
-                        <option value="" disabled>Виберіть барбера</option>
-                        <option v-for="barber in barbers" :value="barber.rank_id">{{ barber.name + ' (' + barber.rank_title + ')' }}</option>
-                    </select>
-                    <select v-model="selectedServices" multiple class="input-field">
-                        <option value="" disabled>Виберіть послуги</option>
-                        <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
-                    </select>
-                </div>
 
+                <select v-model="selectedBranch" @change="updateBarbers" class="input-field">
+                    <option value="">Вибрати філію</option>
+                    <option v-for="branch in branches" :value="branch.id">{{ branch.title }}</option>
+                </select>
+                <select v-model="selectedBarber" @change="getServices" class="input-field">
+                    <option value="" disabled>Виберіть барбера</option>
+                    <option v-for="barber in barbers" :value="barber.id">{{ barber.name + ' (' + barber.rank_title + ')' }}</option>
+                </select>
                 <div class="input-wrapper input-flex">
-                    <input v-model="date" type="date" name="date" required class="input-field date">
-                    <input v-model="start" type="time" name="start" required class="input-field date">
+                    <input v-model="scheduleDate" @change="getAvailableHours(selectedBarber, scheduleDate)" type="date" name="scheduleDate" required class="input-field date">
+                    <div class="radio-toolbar">
+                        <template v-for="hour in availableHours">
+                            <input type="radio" :id="hour" :value="hour" v-model="scheduleStart">
+                            <label :for="hour" :class="{ 'selected': scheduleStart === hour }">{{ hour }}</label>
+                        </template>
+                    </div>
                 </div>
+                <select v-model="selectedServices" class="input-field" multiple>
+                    <option value="" disabled>Виберіть послуги</option>
+                    <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
+                </select>
                 <div class="hr"></div>
                 <div class="input-wrapper">
                     <input v-model="name"  type="text" name="name" placeholder="Your Full Name" required class="input-field">
@@ -49,20 +52,27 @@ export default {
             barbers: [],
             services: [],
             selectedBranch: '',
-            selectedBarberRank: '',
+            selectedBarber: '',
             selectedServices: [],
-            date: '',
-            start: '',
+            scheduleDate: '',
+            scheduleStart: '',
             name: '',
             phone: '',
+            availableHours: [],
         }
     },
-
     mounted() {
         this.getBranches()
     },
 
     methods: {
+        getAvailableHours(barberId, date) {
+            this.axios.get(`/api/barbers/${barberId}/available-hours?date=${date}`)
+                .then(res => {
+                    this.availableHours = res.data.data;
+                    console.log(res);
+                })
+        },
         getBranches() {
             this.axios.get('/api/branches')
                 .then(res => {
@@ -74,28 +84,28 @@ export default {
             this.axios.get(`/api/branches/${this.selectedBranch}/barbers`)
                 .then(res => {
                     this.barbers = res.data.data
-                    this.selectedBarberRank = ''
+                    console.log(this.barbers);
+                    this.selectedBarber = ''
                     this.getServices()
                 })
         },
         getServices() {
-            this.axios.get(`/api/ranks/${this.selectedBarberRank}/services`)
+            this.axios.get(`/api/barbers/${this.selectedBarber}/services`)
                 .then(res => {
                     this.services = res.data.data;
                     console.log(this.services);
                     this.selectedServices = ''
                 })
-
         },
         appointment() {
             console.log(this.selectedServices);
             this.axios.post('/api/orders', {
-                'rank_id': this.selectedBarberRank,
+                'barber_id': this.selectedBarber,
                 'services': this.selectedServices,
                 'customer_name': this.name,
                 'customer_phone': this.phone,
-                'date': this.date,
-                'start': this.start,
+                'date': this.scheduleDate,
+                'start': this.scheduleStart,
             })
                 .then(res => {
                     alert(res.data.data.customer_name + ', Замовлення успішно створено');
@@ -110,14 +120,39 @@ export default {
 </script>
 
 <style scoped>
-.input-flex {
-    display: flex;
-    gap: 20px;
-}
 .hr {
     width: 75%;
     margin: 0 auto 20px;
     border-top: 2px dashed  white;
 }
+.radio-toolbar {
+    margin-bottom: 20px;
+}
+
+.radio-toolbar input[type="radio"] {
+    display: none;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    padding: 2px 9px;
+    width: 83.71px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 2px 2px 0;
+    cursor: pointer;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    background: white;
+}
+
+.radio-toolbar label.selected {
+    background-color: red;
+}
+
+.radio-toolbar label:hover {
+    background-color: #ffe78a;
+}
+
 </style>
 

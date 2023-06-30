@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\ServiceRank;
+namespace App\Http\Resources\Barber;
 
 use App\Http\Resources\Service\ServiceResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ServiceRankResource extends JsonResource
+class BarberServiceResource extends JsonResource
 {
     public function toArray($request)
     {

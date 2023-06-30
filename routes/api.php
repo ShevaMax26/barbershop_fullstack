@@ -22,5 +22,6 @@ Route::post('/orders', \App\Http\Controllers\API\Order\StoreController::class);
 Route::get('rank-services', \App\Http\Controllers\API\RankService\RankServiceController::class);
 Route::get('branches', \App\Http\Controllers\API\BranchController::class);
 Route::get('/branches/{branch}/barbers', \App\Http\Controllers\API\BarberBranchController::class);
-Route::get('/ranks/{rank}/services', \App\Http\Controllers\API\ServiceRankController::class);
+Route::get('/barbers/{barber}/services', [\App\Http\Controllers\API\Barber\BarberController::class, 'getServices']);
+Route::get('/barbers/{barber}/available-hours', [\App\Http\Controllers\API\Barber\BarberController::class, 'getAvailableHours']);
 

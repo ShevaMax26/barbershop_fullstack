@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BarberBranch\BarberBranchResource;
+use App\Http\Resources\Barber\BarberBranchResource;
 use App\Models\Branch;
 
 class BarberBranchController extends Controller

@@ -6,12 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Order\StoreRequest;
 use App\Http\Resources\Order\OrderResource;
 use App\Models\Barber;
-use App\Models\BarberSchedule;
 use App\Models\Order;
-use App\Models\Service;
 use App\Models\ServiceDetail;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 
 class StoreController extends Controller
 {
@@ -20,15 +17,16 @@ class StoreController extends Controller
         $data = $request->validated();
 //        $start = Carbon::parse($data['date'])->setTimeFromTimeString($data['start']);
 
-        $period = CarbonPeriod::create('2018-06-14 09:00', '30 minutes', '2018-06-14 16:00');
-        $periodArray = [];
-        foreach ($period as $time) {
-            $periodArray[] = $time->format('H:i');
-        }
-//        dd($periodArray);
+//        $period = CarbonPeriod::create('2018-06-14 10:00', '30 minutes', '2018-06-14 22:00');
+//        $periodArray = [];
+//        foreach ($period as $time) {
+//            $periodArray[] = $time->format('H:i');
+//        }
 
+        $barber = Barber::findOrFail($data['barber_id']);
+        $rankId = $barber->rank_id;
 
-        $serviceDetails = ServiceDetail::where('rank_id', $data['rank_id'])
+        $serviceDetails = ServiceDetail::where('rank_id', $rankId)
             ->whereIn('service_id', $data['services'])
             ->get();
 

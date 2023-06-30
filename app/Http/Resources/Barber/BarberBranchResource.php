@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\BarberBranch;
+namespace App\Http\Resources\Barber;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

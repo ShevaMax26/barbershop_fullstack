@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\API\Order;
+namespace App\Http\Requests\API\Barber;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class AvailableHourRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'barber_id' => 'nullable|integer',
-            'services' => 'nullable|array',
-            'customer_name' => 'nullable|string',
-            'customer_phone' => 'nullable|integer',
             'date' => 'nullable',
-            'start' => 'nullable',
         ];
     }
 }
