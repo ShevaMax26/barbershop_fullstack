@@ -83,5 +83,14 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Auth::routes();
-
+Route::get('/test', function (\Illuminate\Http\Request $request) {
+    $query = \App\Models\ServiceDetail::query();
+    if ($request->get('service_id')) {
+        $query->where('service_id', $request->get('service_id'));
+    }
+    if ($request->get('rank_id')) {
+        $query->where('rank_id', $request->get('rank_id'));
+    }
+    dd($query->get());
+});
 Route::get('/{any?}', Client\IndexController::class)->where('any', '.*');

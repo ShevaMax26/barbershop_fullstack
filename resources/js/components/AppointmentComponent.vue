@@ -4,7 +4,7 @@
         <div class="container">
             <form action="" class="appoin-form " style="width: 600px; margin: 0 auto 0 auto">
 
-                <select v-model="selectedBranch" @change="updateBarbers" class="input-field">
+                <select v-model="selectedBranch" @change="getBarbers" class="input-field">
                     <option value="">Вибрати філію</option>
                     <option v-for="branch in branches" :value="branch.id">{{ branch.title }}</option>
                 </select>
@@ -38,6 +38,15 @@
 <!--                    <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>-->
                 </button>
             </form>
+<!--            <input v-for="availableDate in availableDates" @click="selectDate()" type="button" :value="availableDate.month" style="background: red; width: 70px; margin-bottom: 3px;">-->
+
+<!--            <div>-->
+<!--                <div v-for="hour in selectedDate.hours" :key="hour.id" @click="selectHour(hour)">-->
+<!--                    {{ hour }}-->
+<!--                </div>-->
+<!--            </div>-->
+
+
         </div>
     </section>
 </template>
@@ -59,20 +68,36 @@ export default {
             name: '',
             phone: '',
             availableHours: [],
+            availableDates: [],
+
+            selectMonth: '',
         }
     },
     mounted() {
         this.getBranches()
+        this.getAvailableDate()
     },
 
     methods: {
-        getAvailableHours(barberId, date) {
-            this.axios.get(`/api/barbers/${barberId}/available-hours?date=${date}`)
+        getAvailableDate() {
+            this.axios.get('/api//barbers/1/available-date')
                 .then(res => {
-                    this.availableHours = res.data.data;
-                    console.log(res);
+                    this.availableDates = res.data.data;
+                    console.log(this.availableDates);
                 })
         },
+        selectDate() {
+            this.selectedDate = {
+                date: date,
+                hours: ['10:00', '11:00', '12:00'], // Статичний список годин для вибраної дати
+            };
+        },
+        selectHour(hour) {
+            // Обробка вибраної години
+            console.log(hour);
+        },
+
+
         getBranches() {
             this.axios.get('/api/branches')
                 .then(res => {
@@ -80,13 +105,19 @@ export default {
                     this.selectedServices = ''
                 })
         },
-        updateBarbers() {
+        getBarbers() {
             this.axios.get(`/api/branches/${this.selectedBranch}/barbers`)
                 .then(res => {
                     this.barbers = res.data.data
                     console.log(this.barbers);
                     this.selectedBarber = ''
-                    this.getServices()
+                })
+        },
+        getAvailableHours(barberId, date) {
+            this.axios.get(`/api/barbers/${barberId}/available-hours?date=${date}`)
+                .then(res => {
+                    this.availableHours = res.data.data;
+                    console.log(res);
                 })
         },
         getServices() {
@@ -95,6 +126,8 @@ export default {
                     this.services = res.data.data;
                     console.log(this.services);
                     this.selectedServices = ''
+                    this.availableHours = ''
+                    this.scheduleDate = ''
                 })
         },
         appointment() {

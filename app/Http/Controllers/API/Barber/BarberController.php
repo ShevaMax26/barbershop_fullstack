@@ -8,12 +8,11 @@ use App\Http\Resources\Barber\BarberServiceResource;
 use App\Models\Barber;
 use App\Models\Order;
 use Carbon\Carbon;
-use Carbon\CarbonInterval;
-use Carbon\CarbonPeriod;
+use Illuminate\Http\Request;
 
 class BarberController extends Controller
 {
-    public function getServices(Barber $barber)
+    public function getServices(Request $request, Barber $barber)
     {
         $services = $barber->rank->serviceDetails()->with('service')->orderBy('service_id', 'asc')->get();
 
@@ -22,36 +21,35 @@ class BarberController extends Controller
 
     public function getAvailableHours(AvailableHourRequest $request, Barber $barber)
     {
-//        $date = $request->validated();
-//
-//        $period = CarbonPeriod::create('2018-06-14 10:00', '30 minutes', '2018-06-14 22:00');
-//        $periodArray = [];
-//        foreach ($period as $time) {
-//            $periodArray[] = $time->format('H:i');
-//        }
-
         $date = $request->input('date');
 
-// Створюємо об'єкт Carbon з заданою датою і часом початку робочого дня
         $startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 10:00:00');
 
-// Створюємо об'єкт Carbon з заданою датою і часом кінця робочого дня
         $endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 21:30:00');
 
-// Створюємо порожній масив для зберігання доступних годин
+//        $servicesTime = ServicePrice::whereIn('id', $data['service_price_ids'])->sum('time');
+
         $availableHours = [];
 
-// Перебираємо час з інтервалом 30 хвилин
+        $dateOrders = Order::where('barber_id', $barber->id)->where('date', $date)->get();
+
+        // Перебираємо час з інтервалом 30 хвилин
         while ($startDateTime <= $endDateTime) {
+//            $endServicesTime = (clone $startDateTime)->addMinutes($servicesTime);
+//            $orderCount = $dateOrders->where('from', '<', $endServicesTime)->where('to', '>', $startDateTime)->count();
+
+
+
+
             // Перевіряємо, чи немає замовлень для даного барбера та часу
-            $orderCount = Order::where('barber_id', 1)
+            $orderCount = Order::where('barber_id', $barber->id)
                 ->where('date', $date)
                 ->where('start', '<=', $startDateTime->format('H:i:s'))
                 ->where('end', '>', $startDateTime->format('H:i:s'))
                 ->count();
 
             // Якщо немає замовлень, додаємо час до доступних годин
-            if ($orderCount === 0) {
+            if ($orderCount === 0 && $endServicesTime <= $endDateTime) {
                 $availableHours[] = $startDateTime->format('H:i');
             }
 
@@ -59,8 +57,42 @@ class BarberController extends Controller
             $startDateTime->addMinutes(30);
         }
 
-// Повертаємо список доступних годин
         return response()->json(['data' => $availableHours]);
+    }
+
+    public function getAvailableDate()
+    {
+
+        $currentMonth = now();
+        $endMonth = now()->endOfMonth();
+
+        $dates = [];
+
+        $monthDays = [];
+
+        while ($currentMonth < $endMonth) {
+            $monthDays[] = $currentMonth->format('d');
+            $currentMonth->addDay();
+        }
+        $dates[] = [
+            'month' => now()->format('F'),
+            'days' => $monthDays,
+        ];
+
+        $monthDays = [];
+        $currentMonth = $endMonth->copy()->addDay();
+        $nextMonth = $currentMonth->copy()->addMonth();
+
+        while ($currentMonth < $nextMonth) {
+            $monthDays[] = $currentMonth->format('d');
+            $currentMonth->addDay();
+        }
+        $dates[] = [
+            'month' => now()->addMonth()->format('F'),
+            'days' => $monthDays,
+        ];
+
+        return response()->json(['data' => $dates]);
 
     }
 }
