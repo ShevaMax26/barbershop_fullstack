@@ -24,8 +24,8 @@ class AvailableHourRequest extends FormRequest
     public function rules()
     {
         return [
-            'barber_id' => 'nullable|integer',
-            'date' => 'nullable',
+            'services' => 'required|array',
+            'date' => 'required',
         ];
     }
 }

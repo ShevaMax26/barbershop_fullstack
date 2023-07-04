@@ -7,6 +7,7 @@ use App\Http\Requests\API\Barber\AvailableHourRequest;
 use App\Http\Resources\Barber\BarberServiceResource;
 use App\Models\Barber;
 use App\Models\Order;
+use App\Models\ServiceDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -21,13 +22,17 @@ class BarberController extends Controller
 
     public function getAvailableHours(AvailableHourRequest $request, Barber $barber)
     {
-        $date = $request->input('date');
+        $data = $request->validated();
+
+        $date = $data['date'];
 
         $startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 10:00:00');
 
-        $endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 21:30:00');
+        $endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 22:00:00');
 
-//        $servicesTime = ServicePrice::whereIn('id', $data['service_price_ids'])->sum('time');
+        $rankId = $barber->rank_id;
+
+        $servicesTime = ServiceDetail::where('rank_id', $rankId)->whereIn('service_id', $data['services'])->sum('duration');
 
         $availableHours = [];
 
@@ -35,22 +40,12 @@ class BarberController extends Controller
 
         // Перебираємо час з інтервалом 30 хвилин
         while ($startDateTime <= $endDateTime) {
-//            $endServicesTime = (clone $startDateTime)->addMinutes($servicesTime);
-//            $orderCount = $dateOrders->where('from', '<', $endServicesTime)->where('to', '>', $startDateTime)->count();
-
-
-
-
-            // Перевіряємо, чи немає замовлень для даного барбера та часу
-            $orderCount = Order::where('barber_id', $barber->id)
-                ->where('date', $date)
-                ->where('start', '<=', $startDateTime->format('H:i:s'))
-                ->where('end', '>', $startDateTime->format('H:i:s'))
-                ->count();
+            $endServicesTime = (clone $startDateTime)->addMinutes($servicesTime);
+            $orderCount = $dateOrders->where('start', '<', $endServicesTime->toTimeString())->where('end', '>', $startDateTime->toTimeString())->count();
 
             // Якщо немає замовлень, додаємо час до доступних годин
             if ($orderCount === 0 && $endServicesTime <= $endDateTime) {
-                $availableHours[] = $startDateTime->format('H:i');
+            $availableHours[] = $startDateTime->format('H:i');
             }
 
             // Додаємо 30 хвилин до часу

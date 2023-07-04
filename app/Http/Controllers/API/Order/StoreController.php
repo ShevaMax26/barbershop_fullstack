@@ -35,7 +35,7 @@ class StoreController extends Controller
         $end = (clone $start)->addMinutes($duration);
 
         $order = Order::create([
-            'barber_id' => 1,
+            'barber_id' => $data['barber_id'],
             'date' => $data['date'],
             'start' => $data['start'],
             'end' => $end,

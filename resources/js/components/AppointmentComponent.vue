@@ -12,8 +12,12 @@
                     <option value="" disabled>Виберіть барбера</option>
                     <option v-for="barber in barbers" :value="barber.id">{{ barber.name + ' (' + barber.rank_title + ')' }}</option>
                 </select>
+                <select v-model="selectedServices" class="input-field" multiple>
+                    <option value="" disabled>Виберіть послуги</option>
+                    <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
+                </select>
                 <div class="input-wrapper input-flex">
-                    <input v-model="scheduleDate" @change="getAvailableHours(selectedBarber, scheduleDate)" type="date" name="scheduleDate" required class="input-field date">
+                    <input v-model="scheduleDate" @change="getAvailableHours(selectedBarber, scheduleDate, selectedServices)" type="date" name="scheduleDate" required class="input-field date">
                     <div class="radio-toolbar">
                         <template v-for="hour in availableHours">
                             <input type="radio" :id="hour" :value="hour" v-model="scheduleStart">
@@ -21,10 +25,6 @@
                         </template>
                     </div>
                 </div>
-                <select v-model="selectedServices" class="input-field" multiple>
-                    <option value="" disabled>Виберіть послуги</option>
-                    <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
-                </select>
                 <div class="hr"></div>
                 <div class="input-wrapper">
                     <input v-model="name"  type="text" name="name" placeholder="Your Full Name" required class="input-field">
@@ -75,27 +75,27 @@ export default {
     },
     mounted() {
         this.getBranches()
-        this.getAvailableDate()
+        // this.getAvailableDate()
     },
 
     methods: {
-        getAvailableDate() {
-            this.axios.get('/api//barbers/1/available-date')
-                .then(res => {
-                    this.availableDates = res.data.data;
-                    console.log(this.availableDates);
-                })
-        },
-        selectDate() {
-            this.selectedDate = {
-                date: date,
-                hours: ['10:00', '11:00', '12:00'], // Статичний список годин для вибраної дати
-            };
-        },
-        selectHour(hour) {
-            // Обробка вибраної години
-            console.log(hour);
-        },
+        // getAvailableDate() {
+        //     this.axios.get('/api//barbers/1/available-date')
+        //         .then(res => {
+        //             this.availableDates = res.data.data;
+        //             console.log(this.availableDates);
+        //         })
+        // },
+        // selectDate() {
+        //     this.selectedDate = {
+        //         date: date,
+        //         hours: ['10:00', '11:00', '12:00'], // Статичний список годин для вибраної дати
+        //     };
+        // },
+        // selectHour(hour) {
+        //     // Обробка вибраної години
+        //     console.log(hour);
+        // },
 
 
         getBranches() {
@@ -113,13 +113,6 @@ export default {
                     this.selectedBarber = ''
                 })
         },
-        getAvailableHours(barberId, date) {
-            this.axios.get(`/api/barbers/${barberId}/available-hours?date=${date}`)
-                .then(res => {
-                    this.availableHours = res.data.data;
-                    console.log(res);
-                })
-        },
         getServices() {
             this.axios.get(`/api/barbers/${this.selectedBarber}/services`)
                 .then(res => {
@@ -128,6 +121,21 @@ export default {
                     this.selectedServices = ''
                     this.availableHours = ''
                     this.scheduleDate = ''
+                })
+        },
+        getAvailableHours(barberId, date, services) {
+            this.axios.get(`/api/barbers/${barberId}/available-hours`, {
+                params: {
+                    'date': date,
+                    'services': services
+                }
+            })
+                .then(res => {
+                    this.availableHours = res.data.data;
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.log(err);
                 })
         },
         appointment() {
