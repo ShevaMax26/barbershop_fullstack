@@ -9,6 +9,8 @@ use App\Models\Barber;
 use App\Models\Order;
 use App\Models\ServiceDetail;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 
 class BarberController extends Controller
@@ -27,6 +29,10 @@ class BarberController extends Controller
         $date = $data['date'];
 
         $startDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 10:00:00');
+
+        if ($startDateTime->isToday()) {
+            $startDateTime = max($startDateTime, now()->roundMinute(30));
+        }
 
         $endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 22:00:00');
 
@@ -57,37 +63,42 @@ class BarberController extends Controller
 
     public function getAvailableDate()
     {
+        $currentMonth = CarbonImmutable::now()->startOfMonth();
+        $nextMonth = CarbonImmutable::now()->addMonth()->startOfMonth();
 
-        $currentMonth = now();
-        $endMonth = now()->endOfMonth();
+        $months = [];
 
-        $dates = [];
+        // Встановлюємо локаль на українську
+        App::setLocale('uk');
 
-        $monthDays = [];
+        while ($currentMonth <= $nextMonth) {
+            $month = [
+                'month' => $currentMonth->isoFormat('MMMM'),
+                'days' => [],
+            ];
 
-        while ($currentMonth < $endMonth) {
-            $monthDays[] = $currentMonth->format('d');
-            $currentMonth->addDay();
+            $startDay = ($currentMonth == CarbonImmutable::now()->startOfMonth()) ? CarbonImmutable::now()->format('d') : 1;
+            $endDay = $currentMonth->daysInMonth;
+
+            for ($day = $startDay; $day <= $endDay; $day++) {
+                $currentDate = $currentMonth->copy()->setDay($day);
+
+                $month['days'][] = [
+                    'day' => str_pad($day, 2, '0', STR_PAD_LEFT),
+                    'date' => $currentDate->format('Y-m-d'),
+                ];
+            }
+
+            $months[] = $month;
+            $currentMonth = $currentMonth->addMonth();
         }
-        $dates[] = [
-            'month' => now()->format('F'),
-            'days' => $monthDays,
-        ];
 
-        $monthDays = [];
-        $currentMonth = $endMonth->copy()->addDay();
-        $nextMonth = $currentMonth->copy()->addMonth();
-
-        while ($currentMonth < $nextMonth) {
-            $monthDays[] = $currentMonth->format('d');
-            $currentMonth->addDay();
-        }
-        $dates[] = [
-            'month' => now()->addMonth()->format('F'),
-            'days' => $monthDays,
-        ];
-
-        return response()->json(['data' => $dates]);
-
+        return response()->json(['data' => $months]);
     }
+
+
+
+
+
+
 }

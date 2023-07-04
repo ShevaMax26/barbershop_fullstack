@@ -12,12 +12,24 @@
                     <option value="" disabled>Виберіть барбера</option>
                     <option v-for="barber in barbers" :value="barber.id">{{ barber.name + ' (' + barber.rank_title + ')' }}</option>
                 </select>
-                <select v-model="selectedServices" class="input-field" multiple>
+                <select v-model="selectedServices" @change="updateAvailableHours" class="input-field" multiple>
                     <option value="" disabled>Виберіть послуги</option>
                     <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
                 </select>
                 <div class="input-wrapper input-flex">
-                    <input v-model="scheduleDate" @change="getAvailableHours(selectedBarber, scheduleDate, selectedServices)" type="date" name="scheduleDate" required class="input-field date">
+                    <div class="form-date">
+                        <div class="form-date__month">
+                            <button class="form-date__btn" type="button" v-for="availableDate in availableMonth" @click="selectDate(availableDate.month)">
+                                {{ availableDate.month }}
+                            </button>
+                        </div>
+                        <ul class="form-date__days date-days">
+                            <li class="date-days__wrapper" v-for="day in days" :key="day.date" @click="updateAvailableDays()">
+                                <button type="button" @click="getAvailableHours(selectedBarber, day.date, selectedServices)">{{ day.day }}</button>
+                            </li>
+                        </ul>
+                    </div>
+<!--                    <input v-model="scheduleDate" @change="getAvailableHours(selectedBarber, scheduleDate, selectedServices)" type="date" name="scheduleDate" required class="input-field date">-->
                     <div class="radio-toolbar">
                         <template v-for="hour in availableHours">
                             <input type="radio" :id="hour" :value="hour" v-model="scheduleStart">
@@ -31,27 +43,19 @@
                     <input v-model="phone" type="tel" name="phone" placeholder="Phone Number" required class="input-field" maxlength="9">
                 </div>
 
-                <textarea name="message" placeholder="Write Message" class="input-field"></textarea>
+                <textarea v-model="description" name="message" placeholder="Write Message" class="input-field"></textarea>
 
                 <button @click.prevent="appointment" type="submit" class="form-btn">
                     <span class="span">Appointment Now</span>
 <!--                    <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>-->
                 </button>
             </form>
-<!--            <input v-for="availableDate in availableDates" @click="selectDate()" type="button" :value="availableDate.month" style="background: red; width: 70px; margin-bottom: 3px;">-->
-
-<!--            <div>-->
-<!--                <div v-for="hour in selectedDate.hours" :key="hour.id" @click="selectHour(hour)">-->
-<!--                    {{ hour }}-->
-<!--                </div>-->
-<!--            </div>-->
-
-
         </div>
     </section>
 </template>
 
 <script>
+
 export default {
     name: 'AppointmentComponent',
 
@@ -67,36 +71,36 @@ export default {
             scheduleStart: '',
             name: '',
             phone: '',
+            description: '',
             availableHours: [],
-            availableDates: [],
+            availableMonth: [],
 
-            selectMonth: '',
+            selectedMonth: '',
+            days: [],
         }
     },
     mounted() {
         this.getBranches()
-        // this.getAvailableDate()
     },
 
     methods: {
-        // getAvailableDate() {
-        //     this.axios.get('/api//barbers/1/available-date')
-        //         .then(res => {
-        //             this.availableDates = res.data.data;
-        //             console.log(this.availableDates);
-        //         })
-        // },
-        // selectDate() {
-        //     this.selectedDate = {
-        //         date: date,
-        //         hours: ['10:00', '11:00', '12:00'], // Статичний список годин для вибраної дати
-        //     };
-        // },
-        // selectHour(hour) {
-        //     // Обробка вибраної години
-        //     console.log(hour);
-        // },
-
+        updateAvailableDays() {
+            this.scheduleStart = '';
+        },
+        getAvailableDate() {
+            this.axios.get('/api//barbers/1/available-date')
+                .then(res => {
+                    this.availableMonth = res.data.data;
+                    console.log(this.availableMonth);
+                })
+        },
+        selectDate(month) {
+            this.updateAvailableDays()
+            const selectedMonth = this.availableMonth.find(date => date.month === month);
+            if (selectedMonth) {
+                this.days = selectedMonth.days;
+            }
+        },
 
         getBranches() {
             this.axios.get('/api/branches')
@@ -111,6 +115,12 @@ export default {
                     this.barbers = res.data.data
                     console.log(this.barbers);
                     this.selectedBarber = ''
+                    this.selectedServices = ''
+                    this.scheduleStart = ''
+                    this.scheduleDate = ''
+                    this.availableMonth = ''
+                    this.days = []
+                    this.getServices()
                 })
         },
         getServices() {
@@ -118,12 +128,13 @@ export default {
                 .then(res => {
                     this.services = res.data.data;
                     console.log(this.services);
-                    this.selectedServices = ''
                     this.availableHours = ''
                     this.scheduleDate = ''
                 })
         },
         getAvailableHours(barberId, date, services) {
+            this.scheduleDate = date;
+
             this.axios.get(`/api/barbers/${barberId}/available-hours`, {
                 params: {
                     'date': date,
@@ -138,6 +149,16 @@ export default {
                     console.log(err);
                 })
         },
+        updateAvailableHours() {
+            this.getAvailableDate()
+
+            if (this.scheduleDate && this.selectedBarber) {
+                this.getAvailableHours(this.selectedBarber, this.scheduleDate, this.selectedServices);
+            } else {
+                // Очистити доступні години, якщо дата або барбер не вибрані
+                this.availableHours = [];
+            }
+        },
         appointment() {
             console.log(this.selectedServices);
             this.axios.post('/api/orders', {
@@ -150,6 +171,16 @@ export default {
             })
                 .then(res => {
                     alert(res.data.data.customer_name + ', Замовлення успішно створено');
+                    this.selectedBranch = ''
+                    this.selectedBarber = ''
+                    this.selectedServices = []
+                    this.scheduleDate = ''
+                    this.scheduleStart = ''
+                    this.name = ''
+                    this.phone = ''
+                    this.description = ''
+                    this.getServices()
+                    this.updateAvailableHours()
                 })
                 .catch(error => {
                     console.error('Помилка при створенні замовлення', error);
@@ -161,13 +192,53 @@ export default {
 </script>
 
 <style scoped>
+.form-date__days::-webkit-scrollbar {
+    height: 6px;
+}
+.form-date__days::-webkit-scrollbar-track {
+    background-color: hsla(0,0%,75%,.5);
+    border-radius: 10px;
+}
+.form-date__days::-webkit-scrollbar-thumb {
+    outline: 1px solid;
+    background: #ffc958;
+    border-radius: 10px;
+}
+.form-date__days::-webkit-scrollbar-thumb:hover {
+    background: #ffbe28;
+}
+.form-date__month {
+    display: flex;
+    gap: 20px;
+}
+
+.form-date__days {
+    display: flex;
+    width: 100%;
+    overflow-y: auto;
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.date-days__wrapper {
+    background: white;
+    border-radius: 50px;
+    padding: 0 7px;
+}
+
+.form-date__btn {
+    background: white;
+    border-radius: 5px;
+    padding: 2px 10px;
+}
+
 .hr {
     width: 75%;
     margin: 0 auto 20px;
     border-top: 2px dashed  white;
 }
 .radio-toolbar {
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .radio-toolbar input[type="radio"] {
@@ -188,12 +259,14 @@ export default {
 }
 
 .radio-toolbar label.selected {
-    background-color: red;
+    background-color: #ffc958;
+}
+.radio-toolbar label.selected:hover {
+    background-color: #ffc958;
 }
 
 .radio-toolbar label:hover {
     background-color: #ffe78a;
 }
-
 </style>
 

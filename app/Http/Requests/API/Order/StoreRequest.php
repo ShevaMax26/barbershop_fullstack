@@ -24,12 +24,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'barber_id' => 'nullable|integer',
-            'services' => 'nullable|array',
-            'customer_name' => 'nullable|string',
-            'customer_phone' => 'nullable|integer',
-            'date' => 'nullable',
-            'start' => 'nullable',
+            'barber_id' => 'required|integer',
+            'services' => 'required|array',
+            'customer_name' => 'required|string',
+            'customer_phone' => 'required|integer',
+            'date' => 'required',
+            'start' => 'required',
         ];
     }
 }
