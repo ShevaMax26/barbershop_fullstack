@@ -12,28 +12,27 @@
                     <option value="" disabled>Виберіть барбера</option>
                     <option v-for="barber in barbers" :value="barber.id">{{ barber.name + ' (' + barber.rank_title + ')' }}</option>
                 </select>
-                <select v-model="selectedServices" @change="updateAvailableHours" class="input-field" multiple>
+                <select v-model="selectedServices" @change="updateAvailableHours()" class="input-field" multiple>
                     <option value="" disabled>Виберіть послуги</option>
                     <option v-for="service in services" :value="service.service.id">{{ service.service.title + ' (' + service.price + 'грн) ' + service.duration + 'хв'  }}</option>
                 </select>
                 <div class="input-wrapper input-flex">
                     <div class="form-date">
-                        <div class="form-date__month">
-                            <button class="form-date__btn" type="button" v-for="availableDate in availableMonth" @click="selectDate(availableDate.month)">
-                                {{ availableDate.month }}
+                        <div v-if="selectedMonth" class="form-date__month">
+                            <button class="form-date__btn" :class="{ 'selected__btn': selectedMonth === availableMonth.month }" type="button" v-for="availableMonth in availableMonths" @click="selectDay(availableMonth.month)">
+                                {{ availableMonth.month }}
                             </button>
                         </div>
                         <ul class="form-date__days date-days">
                             <li class="date-days__wrapper" v-for="day in days" :key="day.date" @click="updateAvailableDays()">
-                                <button type="button" @click="getAvailableHours(selectedBarber, day.date, selectedServices)">{{ day.day }}</button>
+                                <button type="button" class="date-days__btn" :class="{ 'selected__btn': selectedDay === day.date }" @click="getAvailableHours(selectedBarber, day.date, selectedServices)">{{ day.day }}</button>
                             </li>
                         </ul>
                     </div>
-<!--                    <input v-model="scheduleDate" @change="getAvailableHours(selectedBarber, scheduleDate, selectedServices)" type="date" name="scheduleDate" required class="input-field date">-->
                     <div class="radio-toolbar">
                         <template v-for="hour in availableHours">
-                            <input type="radio" :id="hour" :value="hour" v-model="scheduleStart">
-                            <label :for="hour" :class="{ 'selected': scheduleStart === hour }">{{ hour }}</label>
+                            <input type="radio" :id="hour" :value="hour" v-model="selectedHour">
+                            <label :for="hour" :class="{ 'selected': selectedHour === hour }">{{ hour }}</label>
                         </template>
                     </div>
                 </div>
@@ -67,36 +66,39 @@ export default {
             selectedBranch: '',
             selectedBarber: '',
             selectedServices: [],
-            scheduleDate: '',
-            scheduleStart: '',
             name: '',
             phone: '',
             description: '',
             availableHours: [],
-            availableMonth: [],
-
-            selectedMonth: '',
             days: [],
+
+            availableMonths: [],
+            selectedMonth: '',
+            selectedDay: '',
+            selectedHour: '',
         }
     },
     mounted() {
         this.getBranches()
+        this.getAvailableMonths();
     },
 
     methods: {
         updateAvailableDays() {
-            this.scheduleStart = '';
+            this.selectedHour = '';
         },
-        getAvailableDate() {
-            this.axios.get('/api//barbers/1/available-date')
+        getAvailableMonths() {
+            this.axios.get(`/api//barbers/${this.selectedBarber}/available-date`)
                 .then(res => {
-                    this.availableMonth = res.data.data;
-                    console.log(this.availableMonth);
+                    this.availableMonths = res.data.data;
                 })
         },
-        selectDate(month) {
-            this.updateAvailableDays()
-            const selectedMonth = this.availableMonth.find(date => date.month === month);
+        selectDay(month) {
+            this.selectedMonth = month;
+            this.selectedDay = '';
+            this.availableHours = [];
+            this.selectedHour = '';
+            const selectedMonth = this.availableMonths.find(date => date.month === month);
             if (selectedMonth) {
                 this.days = selectedMonth.days;
             }
@@ -116,9 +118,9 @@ export default {
                     console.log(this.barbers);
                     this.selectedBarber = ''
                     this.selectedServices = ''
-                    this.scheduleStart = ''
-                    this.scheduleDate = ''
-                    this.availableMonth = ''
+                    this.selectedHour = ''
+                    this.selectedDay = ''
+                    this.availableMonths = ''
                     this.days = []
                     this.getServices()
                 })
@@ -129,11 +131,12 @@ export default {
                     this.services = res.data.data;
                     console.log(this.services);
                     this.availableHours = ''
-                    this.scheduleDate = ''
+                    this.selectedDay = ''
+                    this.getAvailableMonths()
                 })
         },
         getAvailableHours(barberId, date, services) {
-            this.scheduleDate = date;
+            this.selectedDay = date;
 
             this.axios.get(`/api/barbers/${barberId}/available-hours`, {
                 params: {
@@ -150,12 +153,19 @@ export default {
                 })
         },
         updateAvailableHours() {
-            this.getAvailableDate()
+            if (this.availableMonths.length > 0) {
+                console.log(this.availableMonths);
 
-            if (this.scheduleDate && this.selectedBarber) {
-                this.getAvailableHours(this.selectedBarber, this.scheduleDate, this.selectedServices);
+                this.selectedMonth = this.availableMonths[0].month;
+                this.selectDay(this.selectedMonth);
+                this.selectedDay = this.days[0].date;
+                this.getAvailableHours(this.selectedBarber, this.selectedDay, this.selectedServices);
+            }
+            console.log(this.selectedMonth);
+
+            if (this.selectedDay && this.selectedBarber) {
+                this.getAvailableHours(this.selectedBarber, this.selectedDay, this.selectedServices);
             } else {
-                // Очистити доступні години, якщо дата або барбер не вибрані
                 this.availableHours = [];
             }
         },
@@ -166,21 +176,24 @@ export default {
                 'services': this.selectedServices,
                 'customer_name': this.name,
                 'customer_phone': this.phone,
-                'date': this.scheduleDate,
-                'start': this.scheduleStart,
+                'date': this.selectedDay,
+                'start': this.selectedHour,
             })
                 .then(res => {
                     alert(res.data.data.customer_name + ', Замовлення успішно створено');
                     this.selectedBranch = ''
                     this.selectedBarber = ''
                     this.selectedServices = []
-                    this.scheduleDate = ''
-                    this.scheduleStart = ''
+                    this.services = []
+                    this.selectedDay = ''
+                    this.selectedHour = ''
+                    this.selectedMonth = ''
                     this.name = ''
                     this.phone = ''
                     this.description = ''
-                    this.getServices()
-                    this.updateAvailableHours()
+                    this.availableMonths = [];
+                    this.availableHours = [];
+                    this.days = [];
                 })
                 .catch(error => {
                     console.error('Помилка при створенні замовлення', error);
@@ -192,6 +205,9 @@ export default {
 </script>
 
 <style scoped>
+.selected__btn {
+    background: #ffc958 !important;
+}
 .form-date__days::-webkit-scrollbar {
     height: 6px;
 }
@@ -222,8 +238,12 @@ export default {
 
 .date-days__wrapper {
     background: white;
-    border-radius: 50px;
-    padding: 0 7px;
+    border-radius: 50%;
+}
+
+.date-days__btn {
+    width: 32px;
+    border-radius: 50%;
 }
 
 .form-date__btn {

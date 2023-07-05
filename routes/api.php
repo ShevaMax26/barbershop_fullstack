@@ -24,5 +24,5 @@ Route::get('branches', \App\Http\Controllers\API\BranchController::class);
 Route::get('/branches/{branch}/barbers', \App\Http\Controllers\API\BarberBranchController::class);
 Route::get('/barbers/{barber}/services', [\App\Http\Controllers\API\Barber\BarberController::class, 'getServices']);
 Route::get('/barbers/{barber}/available-hours', [\App\Http\Controllers\API\Barber\BarberController::class, 'getAvailableHours']);
-Route::get('/barbers/1/available-date', [\App\Http\Controllers\API\Barber\BarberController::class, 'getAvailableDate']);
+Route::get('/barbers/{barber}/available-date', [\App\Http\Controllers\API\Barber\BarberController::class, 'getAvailableDate']);
 
