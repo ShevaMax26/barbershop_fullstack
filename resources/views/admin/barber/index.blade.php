@@ -70,8 +70,14 @@
                                             </ul>
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="{{ $barber->image ? asset('storage/' . $barber->image) : asset('/5.png') }}" alt="{{ $barber->fullName }}" style="width: 128px; height: 128px;"
-                                                 class="img-circle img-fluid">
+                                            @if($barber->image)
+                                                <img src="{{ asset('storage/' . $barber->image) }}" alt="{{ $barber->fullName }}" style="width: 128px; height: 128px;"
+                                                    class="img-circle img-fluid">
+                                            @else
+                                                <div style="width: 128px; height: 128px; justify-content: center; align-items: center; display: flex; border: 1px solid grey; border-radius: 50%; margin: 0 auto;">
+                                                    <i class="fas fa-user-tie" style="font-size: 75px; color: grey"></i>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
