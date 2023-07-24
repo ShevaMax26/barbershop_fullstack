@@ -11,7 +11,22 @@ class Order extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    const PAYMENT_STATUS_PENDING = 1;
+    const PAYMENT_STATUS_PAID = 2;
+    const PAYMENT_STATUS_CANCELLED = 3;
+    public function getPaymentStatusString(): string
+    {
+        switch ($this->payment_status) {
+            case self::PAYMENT_STATUS_PENDING:
+                return 'В очікувані';
+            case self::PAYMENT_STATUS_PAID:
+                return 'Успішно';
+            case self::PAYMENT_STATUS_CANCELLED:
+                return 'Скасовано';
+            default:
+                return '';
+        }
+    }
     protected $fillable = [
         'barber_id',
         'date',
@@ -41,9 +56,7 @@ class Order extends Model
 
     public function getTotalAmount()
     {
-        return $this->services->sum(function ($service) {
-            return $service->pivot->price;
-        });
+        return $this->services->sum(fn($service) => $service->pivot->price);
     }
 
     public function getFormattedStartTimeAttribute()

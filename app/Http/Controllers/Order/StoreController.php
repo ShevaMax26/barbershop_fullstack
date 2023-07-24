@@ -10,17 +10,9 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    private $orderManager;
-
-    public function __construct(OrderManager $orderManager)
-    {
-        $this->orderManager = $orderManager;
-    }
     public function __invoke(StoreRequest $request)
     {
-        $data = $request->validated();
-
-        $this->orderManager->store($data);
+        app(OrderManager::class)->store($request->validated());
 
         return redirect()->route('order.index');
     }

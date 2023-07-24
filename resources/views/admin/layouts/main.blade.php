@@ -167,6 +167,8 @@
 
 <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
 
+<script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
+
 <script>
     $(function () {
         bsCustomFileInput.init();
@@ -186,9 +188,7 @@
             ]
         });
     });
-
-
 </script>
-
+@yield('scripts')
 </body>
 </html>
