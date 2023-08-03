@@ -1,6 +1,6 @@
 <template>
     <section class="section hero has-before has-bg-image" id="home" aria-label="home"
-             style="background-image: url('/assets/images/hero-banner.jpg')">
+             style="background-image: url('/assets/images/hero-banner.jpg'); margin-top: -101.59px;">
         <div class="container">
             <form action="" class="appoin-form " style="width: 600px; margin: 0 auto 0 auto">
 

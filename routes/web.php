@@ -82,6 +82,6 @@ Route::group(['prefix' => 'admin'], function () {
     });
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/{any?}', Client\IndexController::class)->where('any', '.*');

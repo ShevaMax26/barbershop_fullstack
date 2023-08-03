@@ -15,13 +15,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="{{ asset('assets/images/hero-banner.jpg') }}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js' ])
 </head>
 
 <body>
-    <div id="app">
-
+    <div id="app" style="height: 100%;">
     </div>
 </body>
 

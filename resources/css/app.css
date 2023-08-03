@@ -133,6 +133,7 @@ html {
     font-family: var(--ff-rubik);
     font-size: 10px;
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -140,6 +141,7 @@ body {
     color: var(--sonic-silver);
     font-size: 1.6rem;
     line-height: 2;
+    height: 100%;
 }
 
 :focus-visible { outline-offset: 4px; }
@@ -286,7 +288,8 @@ body {
 
 .header-bottom {
     position: absolute;
-    top: 45px;
+    background-color: var(--rich-black-fogra-39);
+    top: 0;
     left: 0;
     width: 100%;
     padding-block: 10px;
@@ -296,7 +299,6 @@ body {
 .header-bottom.active {
     position: fixed;
     top: 0;
-    background-color: var(--rich-black-fogra-39);
     transform: translateY(-100%);
     animation: slideIn 0.5s ease forwards;
 }
@@ -902,7 +904,7 @@ a.contact-link:is(:hover, :focus) { color: var(--white); }
         margin-inline: auto;
     }
 
-    .btn { padding: 13px 40px; }
+    .btn { padding: 13px 25px; }
 
     .h2 { --fs-30: 3.5rem; }
 

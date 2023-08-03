@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <HeaderComponent></HeaderComponent>
+    <div class="wrapper">
+        <HeaderComponent :key="$route.fullPath"></HeaderComponent>
 
-        <router-view></router-view>
+        <div class="main">
+            <router-view></router-view>
+        </div>
 
         <FooterComponent></FooterComponent>
         <a href="#app" class="back-top-btn" aria-label="back to top" data-back-top-btn>
@@ -18,17 +20,19 @@ import FooterComponent from "./components/FooterComponent.vue";
 
 export default {
     name: 'App',
+
     components: {FooterComponent, HeaderComponent},
-
-    data() {
-        return {
-
-        }
-    },
-
 }
 </script>
 
 <style scoped>
-
+    .wrapper {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .main {
+        flex: 1 1 auto;
+        margin-top: 101.59px;
+    }
 </style>

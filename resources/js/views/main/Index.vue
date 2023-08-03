@@ -1,5 +1,5 @@
 <template>
-    <main>
+    <main style="margin-top: -101.59px;">
         <article>
 
             <!--
