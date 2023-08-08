@@ -8,8 +8,7 @@
 
         <FooterComponent></FooterComponent>
         <a href="#app" class="back-top-btn" aria-label="back to top" data-back-top-btn>
-<!--            <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>-->
-            UP
+            <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
         </a>
     </div>
 </template>

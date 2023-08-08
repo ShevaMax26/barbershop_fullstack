@@ -1,5 +1,4 @@
 @extends('admin.layouts.main')
-
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -25,47 +24,47 @@
                 <a href="{{ route('order.create') }}" class="btn btn-primary mr-2">Створити</a>
                 <div class="card-tools ml-auto d-flex align-items-center" style="gap: 20px">
                     <div>
-                        <div class="input-group input-group-sm" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                        <form action="{{ route('order.index') }}" method="get">
+                            <input type="hidden" name="page" value="1">
+                            <div class="input-group input-group-sm">
+                                <input type="text" name="search" @if(request('search')) value="{{ request('search')  }}" @endif class="form-control float-right" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    <form action="{{ route('order.index') }}" method="get">
-                        <select name="sort" id="sort" onchange="this.form.submit()" style="height: 31px; border-radius: 0.2rem; padding: 0 10px 0 4px; font-size: 14px">
-                            <option value="id" @if(request('sort') === 'id') selected @endif>За ID</option>
-                            <option value="date" @if(request('sort') === 'date') selected @endif>За Date</option>
-                        </select>
-                    </form>
                 </div>
             </div>
             <div class="card-body table-responsive p-0" style="height: calc(100vh - 314px);">
                 <table class="table table-head-fixed table-hover text-nowrap">
+{{--                    @php--}}
+{{--                        dd(request()->fullUrlWithQuery(['wwww' => 'eeeee']), request()->query())--}}
+{{--                    @endphp--}}
                     <thead>
                     <tr>
-                        <th style="width: 2%">
-                            ID
+                        <th style="width: 3%">
+                            @include('admin.includes.sort', ['field' => 'id', 'name' => 'ID'])
                         </th>
                         <th style="width: 10%">
-                            Клієнт
+                            @include('admin.includes.sort', ['field' => 'customer_name', 'name' => 'Клієнт'])
                         </th>
                         <th style="width: 10%">
-                            Філія
+                            @include('admin.includes.sort', ['field' => 'branches', 'name' => 'Філія'])
                         </th>
                         <th style="width: 10%">
-                            Майстер
+                            @include('admin.includes.sort', ['field' => 'barber_id', 'name' => 'Майстер'])
                         </th>
                         <th>
-                            Послуги
+                            @include('admin.includes.sort', ['field' => 'services_count', 'name' => 'Послуги'])
                         </th>
-                        <th style="width: 15%">
-                            Запис
+                        <th style="width: 10%">
+                            @include('admin.includes.sort', ['field' => 'date', 'name' => 'Запис'])
                         </th>
-                        <th style="width: 6%">
-                            Ціна
+                        <th style="width: 8%">
+                            @include('admin.includes.sort', ['field' => 'services_sum_order_servicesprice', 'name' => 'Ціна'])
                         </th>
                         <th style="width: 1%"></th>
                     </tr>
@@ -88,10 +87,13 @@
                                 <td>
                                     <a href="{{ route('barber.show', $order->barber->id) }}">
                                         @if($order->barber->image)
-                                            <img alt="{{ $order->barber->fullName }}" class="table-avatar rounded" src="{{ asset('storage/' . $order->barber->image) }}" style="width: 48px; height: 48px;">
+                                            <img alt="{{ $order->barber->fullName }}" class="table-avatar rounded"
+                                                 src="{{ asset('storage/' . $order->barber->image) }}"
+                                                 style="width: 48px; height: 48px;">
                                         @else
                                             <div style="align-items: center; display: flex;">
-                                                <i class="fas fa-user-tie" style="font-size: 40px; color: grey; margin-left: 6px;"></i>
+                                                <i class="fas fa-user-tie"
+                                                   style="font-size: 40px; color: grey; margin-left: 6px;"></i>
                                             </div>
                                         @endif
                                     </a>
@@ -104,9 +106,10 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                <td class="project_progress">
+                                <td class="project_progress" style="padding-right: 2rem;">
                                     <div class="progress progress-sm mb-2">
-                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 57%">
                                         </div>
                                     </div>
                                     <span>
@@ -114,10 +117,12 @@
                                 </span>
                                 </td>
                                 <td class="project-state">
-                                    <span class="badge badge-warning" style="font-size: 16px; height: 30px; width: 75px;">{{ $order->getTotalAmount() }} грн</span>
+                                    <span class="badge badge-warning"
+                                          style="font-size: 16px; height: 30px; width: 75px;">{{ $order->getTotalAmount() }} грн</span>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary d-flex align-items-center justify-content-center" href="#">
+                                    <a class="btn btn-primary d-flex align-items-center justify-content-center"
+                                       href="#">
                                         <i class="far fa-eye"></i>
                                     </a>
                                 </td>
@@ -131,7 +136,7 @@
             <div class="card-footer pt-2 pb-2">
                 <nav aria-label="Contacts Page Navigation">
                     <ul class="pagination justify-content-center m-0">
-                        {{ $orders->links() }}
+                        {{ $orders->withQueryString()->links() }}
                     </ul>
                 </nav>
             </div>
