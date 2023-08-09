@@ -40,9 +40,6 @@
             </div>
             <div class="card-body table-responsive p-0" style="height: calc(100vh - 314px);">
                 <table class="table table-head-fixed table-hover text-nowrap">
-{{--                    @php--}}
-{{--                        dd(request()->fullUrlWithQuery(['wwww' => 'eeeee']), request()->query())--}}
-{{--                    @endphp--}}
                     <thead>
                     <tr>
                         <th style="width: 3%">

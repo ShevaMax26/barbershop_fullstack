@@ -20,16 +20,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
+Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('login',  [App\Http\Controllers\AuthController::class, 'login']);
     Route::post('logout', [App\Http\Controllers\AuthController::class, 'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class, 'refresh']);
     Route::post('me', [App\Http\Controllers\AuthController::class, 'me']);
 
-    Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::group(['prefix' => 'users'], function () {
-            Route::get('/cabinet', Cabinet\CabinetController::class);
-        });
+});
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::group(['prefix' => 'cabinet'], function () {
+        Route::get('/', Cabinet\CabinetController::class);
     });
 });
 

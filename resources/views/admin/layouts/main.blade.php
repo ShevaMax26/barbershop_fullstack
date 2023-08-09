@@ -118,12 +118,20 @@
                         <span class="float-right text-muted text-sm">2 days</span>
                     </a>
                     <div class="dropdown-divider"></div>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="nav-link bg-transparent border-0">
+                            <i class="fas fa-arrow-alt-circle-right mr-1"></i>
+                            Logout
+                        </button>
+                    </form>
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
         </ul>
     </nav>
     <!-- /.navbar -->
+
 
     <!-- Main Sidebar Container -->
     <x-admin.sidebar/>

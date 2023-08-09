@@ -14,7 +14,7 @@ const router = createRouter({
             component: () => import('../components/AppointmentComponent.vue')
         },
         {
-            path: '/users/cabinet',
+            path: '/cabinet',
             name: 'user.cabinet',
             component: () => import('../components/User/Cabinet.vue')
         },

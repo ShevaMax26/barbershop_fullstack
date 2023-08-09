@@ -35,7 +35,7 @@ export default {
 
     methods: {
         getUsers() {
-            API.get('/api/auth/users/cabinet')
+            API.get('/api/cabinet')
                 .then(res => {
                     this.users = res.data.data;
                 })

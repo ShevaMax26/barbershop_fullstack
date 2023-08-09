@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', Controllers\Main\IndexController::class)->name('main.index');
 
     Route::group(['prefix' => 'barbers'], function () {
@@ -80,8 +80,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::patch('/{order}', Order\UpdateController::class)->name('order.update');
 //        Route::delete('/{order}', Order\DestroyController::class)->name('order.destroy');
     });
+
 });
 
-//Auth::routes();
+Auth::routes();
 
 Route::get('/{any?}', Client\IndexController::class)->where('any', '.*');
+
