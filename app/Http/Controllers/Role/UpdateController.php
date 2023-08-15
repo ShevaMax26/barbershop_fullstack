@@ -26,6 +26,6 @@ class UpdateController extends Controller
             $role->syncPermissions([]);
         }
 
-        return redirect()->route('role.show', compact('role'));
+        return redirect()->route('user.role.show', compact('role'));
     }
 }

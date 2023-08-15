@@ -8,6 +8,7 @@ use App\Http\Controllers\Rank;
 use App\Http\Controllers\Role;
 use App\Http\Controllers\Service;
 use App\Http\Controllers\Order;
+use App\Http\Controllers\User;
 use App\Http\Controllers\ServiceDetail;
 use Illuminate\Support\Facades\Route;
 
@@ -82,15 +83,24 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 //        Route::delete('/{order}', Order\DestroyController::class)->name('order.destroy');
     });
 
-    Route::group(['prefix' => 'roles', 'middleware' => 'role:super-admin'], function () {
-        Route::get('/', Role\IndexController::class)->name('role.index');
-        Route::get('/create', Role\CreateController::class)->name('role.create');
-        Route::post('/', Role\StoreController::class)->name('role.store');
-        Route::get('/{role}', Role\ShowController::class)->name('role.show');
-        Route::get('/{role}/edit', Role\EditController::class)->name('role.edit');
-        Route::patch('/{role}', Role\UpdateController::class)->name('role.update');
-        Route::delete('/{role}', Role\DestroyController::class)->name('role.destroy');
+    Route::group(['prefix' => 'users', 'middleware' => 'role:super-admin'], function () {
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', Role\IndexController::class)->name('user.role.index');
+            Route::get('/create', Role\CreateController::class)->name('user.role.create');
+            Route::post('/', Role\StoreController::class)->name('user.role.store');
+            Route::get('/{role}', Role\ShowController::class)->name('user.role.show');
+            Route::get('/{role}/edit', Role\EditController::class)->name('user.role.edit');
+            Route::patch('/{role}', Role\UpdateController::class)->name('user.role.update');
+            Route::delete('/{role}', Role\DestroyController::class)->name('user.role.destroy');
+        });
+
+        Route::get('/', User\IndexController::class)->name('user.index');
+        Route::get('/{user}', User\ShowController::class)->name('user.show');
+        Route::get('/{user}/edit', User\EditController::class)->name('user.edit');
+        Route::patch('/{user}', User\UpdateController::class)->name('user.update');
+        Route::delete('/{user}', User\DestroyController::class)->name('user.destroy');
     });
+
 });
 
 Auth::routes();

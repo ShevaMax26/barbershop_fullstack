@@ -21,6 +21,6 @@ class StoreController extends Controller
 
         $role->syncPermissions($permissions);
 
-        return redirect()->route('role.index');
+        return redirect()->route('user.role.index');
     }
 }

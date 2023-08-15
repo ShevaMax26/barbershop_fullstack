@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $role->name }}</h1>
+                    <h1 class="m-0">{{ $user->name }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Ролі</li>
+                        <li class="breadcrumb-item active">Користувачі</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,9 +26,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left mr-5 text-white"></i></a>
-                                <a href="{{ route('user.role.edit', $role->id) }}" class="btn btn-warning mr-3">Edit</a>
-                                <form action="{{ route('user.role.destroy', $role->id) }}" method="post">
+                                <a href="{{ route('user.index') }}"><i class="fas fa-arrow-circle-left mr-5 text-white"></i></a>
+                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning mr-3">Edit</a>
+                                <form action="{{ route('user.destroy', $user->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <input type="submit" class="btn btn-danger" value="Delete">
@@ -40,18 +40,20 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                 <tr>
-                                    <th>№</th>
-                                    <th>Назва</th>
-                                    <th>Права</th>
+                                    <th>ID</th>
+                                    <th>Ім'я</th>
+                                    <th>Email</th>
+                                    <th>Роль</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>{{ $role->id }}</td>
-                                        <td>{{ $role->name }}</td>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>
-                                            @forelse($role->permissions as $permission)
-                                                <div>{{ $permission->name }}</div>
+                                            @forelse($user->roles as $role)
+                                                <div>{{ $role->name }}</div>
                                             @empty
                                                 -
                                             @endforelse

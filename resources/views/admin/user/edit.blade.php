@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Редагування ролі</h1>
+                    <h1 class="m-0">Редагування користувача</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Ролі</li>
+                        <li class="breadcrumb-item active">Користувачі</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -22,7 +22,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <form action="{{ route('user.role.update', $role->id) }}" method="post" class="w-25">
+                <form action="{{ route('user.update', $user->id) }}" method="post" class="w-25">
                     @csrf
                     @method('patch')
                     @if ($errors->any())
@@ -36,25 +36,23 @@
                     @endif
 
                     <div class="form-group">
-                        <input type="text" name="name" value="{{ $role->name }}" class="form-control mb-2" placeholder="Назва">
-                        @error('name')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                        <input type="text" name="name" value="{{ $user->name }}" class="form-control mb-2" placeholder="Назва">
                     </div>
-                    @foreach($permissions as $permission)
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="permissions[]"
-                                       @if($role->hasPermissionTo($permission->name)) checked @endif
-                                       id="{{ 'permissions' . $permission->id }}" value="{{ $permission->id }}"
-                                >
-                                <label for="{{ 'permissions' . $permission->id }}" class="custom-control-label">{{ $permission->name }}</label>
-                            </div>
-                        </div>
-                    @endforeach
+                    <div class="form-group">
+                        <input type="text" name="email" value="{{ $user->email }}" class="form-control mb-2" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="role_id">Роль:</label>
+                        <select name="role_id" class="form-control">
+                            <option selected="selected" disabled>-</option>
+                            @foreach($roles as $role)
+                                <option value="{{ $role->id }}" {{ $user->hasRole($role->name) ? 'selected' : '' }}>{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="d-flex align-items-center">
                         <button type="submit" class="btn btn-warning">Update</button>
-                        <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                        <a href="{{ route('user.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
                     </div>
                 </form>
             </div>

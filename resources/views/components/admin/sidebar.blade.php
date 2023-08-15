@@ -59,12 +59,35 @@
                     </a>
                 </li>
                 @role('super-admin')
-                <li class="nav-item">
-                    <a href="{{ route('role.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user-shield"></i>
-                        <p>Ролі</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Користувачі
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: none;">
+                            <li class="nav-item">
+                                <a href="{{ route('user.role.index') }}" class="nav-link pl-4">
+                                    <i class="nav-icon fas fa-crown"></i>
+                                    <p>Ролі</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('user.role.index') }}" class="nav-link pl-4">
+                                    <i class="nav-icon fas fa-lock"></i>
+                                    <p>Права доступу</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('user.index') }}" class="nav-link pl-4">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>Перегляд</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @endrole
             </ul>
         </nav>
