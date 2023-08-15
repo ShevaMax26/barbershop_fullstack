@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
             RankSeeder::class,
             ServiceSeeder::class,
             BarberSeeder::class,
+            SuperAdminSeeder::class,
+            PermissionSeeder::class,
         ]);
 
         Barber::factory(5)->create();

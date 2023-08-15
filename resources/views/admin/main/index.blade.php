@@ -100,7 +100,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" style="margin-right: 15px;">
+                @role('super-admin')
+                    <div class="card" style="margin-right: 15px;">
                     <div class="card-header">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>Топ послуг</div>
@@ -135,6 +136,7 @@
                         </table>
                     </div>
                 </div>
+                @endrole
             </div>
         </div><!--/. container-fluid -->
     </section>

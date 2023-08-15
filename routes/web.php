@@ -5,6 +5,7 @@ use App\Http\Controllers\Client;
 use App\Http\Controllers\Barber;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\Rank;
+use App\Http\Controllers\Role;
 use App\Http\Controllers\Service;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\ServiceDetail;
@@ -81,6 +82,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 //        Route::delete('/{order}', Order\DestroyController::class)->name('order.destroy');
     });
 
+    Route::group(['prefix' => 'roles', 'middleware' => 'role:super-admin'], function () {
+        Route::get('/', Role\IndexController::class)->name('role.index');
+        Route::get('/create', Role\CreateController::class)->name('role.create');
+        Route::post('/', Role\StoreController::class)->name('role.store');
+        Route::get('/{role}', Role\ShowController::class)->name('role.show');
+        Route::get('/{role}/edit', Role\EditController::class)->name('role.edit');
+        Route::patch('/{role}', Role\UpdateController::class)->name('role.update');
+        Route::delete('/{role}', Role\DestroyController::class)->name('role.destroy');
+    });
 });
 
 Auth::routes();

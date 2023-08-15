@@ -7,29 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    const ROLE_ADMIN = 0;
-    const ROLE_BARBER = 1;
-    const ROLE_CLIENT = 2;
-
-    public static function getRoles(): array
-    {
-        return [
-            self::ROLE_ADMIN => 'Admin',
-            self::ROLE_BARBER => 'Barber',
-            self::ROLE_CLIENT => 'Client',
-        ];
-    }
     protected $fillable = [
         'name',
         'email',
         'password',
-        'role',
     ];
 
     /**

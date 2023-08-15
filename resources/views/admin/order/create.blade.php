@@ -77,7 +77,7 @@
                                     <option value="{{ $service->id }}">{{ $service->title }}</option>
                                 @endforeach
                             </select>
-                            @error('services[]')
+                            @error('services')
                             <div>{{ $message }}</div>
                             @enderror
                         </div>

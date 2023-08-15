@@ -21,7 +21,9 @@ class StoreController extends Controller
         }
         $user = User::create($data);
 
-        $token = auth()->tokenById($user->id);
+        $user->assignRole('user');
+
+        $token = auth('api')->tokenById($user->id);
 
         return response(['access_token' => $token]);
     }

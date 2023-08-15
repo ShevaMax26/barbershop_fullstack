@@ -58,6 +58,14 @@
                         <p>Ранги</p>
                     </a>
                 </li>
+                @role('super-admin')
+                <li class="nav-item">
+                    <a href="{{ route('role.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-user-shield"></i>
+                        <p>Ролі</p>
+                    </a>
+                </li>
+                @endrole
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
