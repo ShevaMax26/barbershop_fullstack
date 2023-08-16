@@ -9,6 +9,7 @@ use App\Http\Controllers\Role;
 use App\Http\Controllers\Service;
 use App\Http\Controllers\Order;
 use App\Http\Controllers\User;
+use App\Http\Controllers\Permission;
 use App\Http\Controllers\ServiceDetail;
 use Illuminate\Support\Facades\Route;
 
@@ -101,6 +102,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::delete('/{user}', User\DestroyController::class)->name('user.destroy');
     });
 
+    Route::get('/get-permissions', [Permission\PermissionController::class, 'getPermissions'])->name('get-permissions');
 });
 
 Auth::routes();

@@ -39,14 +39,9 @@
                             <input type="text" name="name" class="form-control mb-2" placeholder="Назва" value="{{ old('name') }}">
                         </div>
 
-                        @foreach($permissions as $permission)
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" name="permissions[]" id="{{ 'permissions' . $permission->id }}" value="{{ $permission->id }}">
-                                    <label for="{{ 'permissions' . $permission->id }}" class="custom-control-label">{{ $permission->name }}</label>
-                                </div>
-                            </div>
-                        @endforeach
+                        <div class="form-group">
+                            <select id="permissions" data-route="{{ route('get-permissions') }}" multiple="multiple" data-placeholder="Виберіть дозволи" class="w-100" name="permissions[]"></select>
+                        </div>
 
                         <div class="d-flex align-items-center">
                             <button type="submit" class="btn btn-success">Створити</button>
@@ -58,4 +53,8 @@
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('assets/js/getPermission.js') }}"></script>
 @endsection

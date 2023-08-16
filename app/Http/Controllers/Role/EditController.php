@@ -12,8 +12,8 @@ class EditController extends Controller
     {
         $role = Role::where('name', '!=', 'super-admin')->findOrFail($role->id);
 
-        $permissions = Permission::all();
+        $selectedPermissions = $role->permissions->toArray();
 
-        return view('admin.role.edit', compact('role', 'permissions'));
+        return view('admin.role.edit', compact('role', 'selectedPermissions'));
     }
 }

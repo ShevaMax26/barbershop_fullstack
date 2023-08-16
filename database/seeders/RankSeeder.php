@@ -18,7 +18,7 @@ class RankSeeder extends Seeder
         ];
 
         foreach ($ranks as $rank) {
-            Rank::create([
+            Rank::firstOrCreate([
                 'title' => $rank
             ]);
         }

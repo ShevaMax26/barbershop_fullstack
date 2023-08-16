@@ -26,12 +26,6 @@ class SuperAdminSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
 
-        Role::create([
-            'name' => 'super-admin',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-
         $superAdmin->assignRole('super-admin');
     }
 }

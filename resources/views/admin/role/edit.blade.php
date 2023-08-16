@@ -22,43 +22,46 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <form action="{{ route('user.role.update', $role->id) }}" method="post" class="w-25">
-                    @csrf
-                    @method('patch')
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    <div class="form-group">
-                        <input type="text" name="name" value="{{ $role->name }}" class="form-control mb-2" placeholder="Назва">
-                        @error('name')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    @foreach($permissions as $permission)
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" name="permissions[]"
-                                       @if($role->hasPermissionTo($permission->name)) checked @endif
-                                       id="{{ 'permissions' . $permission->id }}" value="{{ $permission->id }}"
-                                >
-                                <label for="{{ 'permissions' . $permission->id }}" class="custom-control-label">{{ $permission->name }}</label>
+                <div class="col-12">
+                    <form action="{{ route('user.role.update', $role->id) }}" method="post" class="w-25">
+                        @csrf
+                        @method('patch')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
+                        @endif
+
+                        <div class="form-group">
+                            <input type="text" name="name" value="{{ $role->name }}" class="form-control mb-2" placeholder="Назва">
+                            @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                    @endforeach
-                    <div class="d-flex align-items-center">
-                        <button type="submit" class="btn btn-warning">Update</button>
-                        <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
-                    </div>
-                </form>
+
+                        <div class="form-group">
+                            <select id="permissions" data-route="{{ route('get-permissions') }}"  data-selected-permissions="{{ json_encode($selectedPermissions) }}" multiple="multiple" data-placeholder="Виберіть дозволи" class="w-100" name="permissions[]"></select>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <button type="submit" class="btn btn-warning">Update</button>
+                            <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
+@endsection
+
+@section('scripts')
+    <script>
+        var selectedPermissions = @json($selectedPermissions);
+    </script>
+    <script src="{{ asset('assets/js/getPermission.js') }}"></script>
 @endsection
