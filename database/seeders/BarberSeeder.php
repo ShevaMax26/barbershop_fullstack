@@ -35,7 +35,7 @@ class BarberSeeder extends Seeder
         ];
 
         foreach ($barbers as $barber) {
-            Barber::create($barber);
+            Barber::firstOrCreate($barber);
         }
     }
 }

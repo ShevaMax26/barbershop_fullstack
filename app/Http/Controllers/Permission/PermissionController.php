@@ -12,6 +12,6 @@ class PermissionController extends Controller
     {
         $data = Permission::where('name', 'like', '%' . $request->searchItem . '%');
 
-        return $data->paginate(10, ['*'], 'page', $request->page);
+        return $data->paginate(10, ['id', 'name'], 'page', $request->page);
     }
 }

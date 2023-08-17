@@ -29,9 +29,11 @@ $(function() {
         templateSelection: templateSelection,
     });
 
-    for (var i = 0; i < selectedPermissions.length; i++) {
-        var option = new Option(selectedPermissions[i].name, selectedPermissions[i].id, true, true);
-        $('#permissions').append(option).trigger('change');
+    if (typeof selectedPermissions !== 'undefined'){
+        for (var i = 0; i < selectedPermissions.length; i++) {
+            var option = new Option(selectedPermissions[i].name, selectedPermissions[i].id, true, true);
+            $('#permissions').append(option).trigger('change');
+        }
     }
 });
 
