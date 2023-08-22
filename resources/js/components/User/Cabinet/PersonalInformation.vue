@@ -1,5 +1,5 @@
 <template>
-    <h2 style="text-align: center; margin-top: 20px; color: #00cd5a">User cabinet</h2>
+    <h1 class="header">Це сторінки особистої інформації</h1>
     <table class="table">
         <thead>
         <tr>
@@ -21,19 +21,25 @@
 <script>
 import API from "@/api";
 export default {
-    name: 'User',
-
     data() {
         return {
+            user: null,
             users: [],
         }
     },
 
     mounted() {
+        // this.getUserInformation()
         this.getUsers()
     },
 
     methods: {
+        // getUserInformation() {
+        //     API.get('/api/users/list')
+        //         .then(res => {
+        //             console.log(res);
+        //         })
+        // },
         getUsers() {
             API.get('/api/cabinet')
                 .then(res => {
@@ -45,8 +51,7 @@ export default {
 </script>
 
 <style scoped>
-.table {
-    padding: 60px 0;
-    margin: 0 auto;
+.header {
+    color: red;
 }
 </style>

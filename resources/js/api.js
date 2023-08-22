@@ -18,20 +18,34 @@ api.interceptors.request.use(config => {
 //start response
 api.interceptors.response.use({}, error => {
     if (error.response.data.message === 'Token has expired') {
-        return axios.post('api/auth/refresh', {}, {
-            headers: {
-                'authorization': `Bearer ${localStorage.getItem('access_token')}`
-            }
-        })
-            .then(res => {
-                localStorage.setItem('access_token', res.data.access_token)
-                error.config.headers.authorization = `Bearer ${res.data.access_token}`
-                return api.request(error.config)
+        const accessToken = localStorage.getItem('access_token');
+
+        if (accessToken) {
+            return axios.post('/api/auth/refresh', {}, {
+                headers: {
+                    'authorization': `Bearer ${accessToken}`
+                }
             })
-    }
-    if(error.response.status === 401) {
-        router.push({name: 'user.login'})
+                .then(res => {
+                    localStorage.setItem('access_token', res.data.access_token);
+                    error.config.headers.authorization = `Bearer ${res.data.access_token}`;
+                    return api.request(error.config);
+                })
+                .catch(refreshError => {
+                    logout();
+                });
+        } else {
+            router.push({ name: 'user.login' });
+        }
     }
 });
+
+function logout() {
+    api.post('/api/auth/logout')
+        .then(res => {
+            localStorage.removeItem('access_token')
+            router.push({ name: 'user.login' });
+        })
+}
 
 export default api
