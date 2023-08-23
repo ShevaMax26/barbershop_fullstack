@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Барбери</h1>
+                    <h1 class="m-0">Працівники</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Барбери</li>
+                        <li class="breadcrumb-item active">Працівники</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-12 mb-3">
                         <div class="d-flex align-items-center justify-content-between">
-                            <a href="http://barbershop-fullstack/admin/barbers/create"
+                            <a href="{{ route('employee.create') }}"
                                class="btn btn-primary">Створити</a>
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" >
@@ -42,16 +42,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach($barbers as $barber)
+                    @foreach($employees as $employee)
                         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
                             <div class="card bg-light d-flex flex-fill">
                                 <div class="card-header text-muted border-bottom-0">
-                                    {{ $barber->rank->title }}
+                                    {{ $employee->rank ? $employee->rank->title : '-'}}
                                 </div>
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-7">
-                                            <h2 class="lead"><b>{{ $barber->fullName }}</b></h2>
+                                            <h2 class="lead"><b>{{ $employee->fullName }}</b></h2>
                                             <p class="text-muted text-sm"><b>Відгуки: </b>
                                                 <i class="fas fa-star" style="color: #ffcb00;"></i>
                                                 <i class="fas fa-star" style="color: #ffcb00;"></i>
@@ -62,16 +62,16 @@
                                             </p>
                                             <ul class="ml-4 mb-0 fa-ul text-muted">
                                                 <li class="small mb-1"><span class="fa-li"><i
-                                                            class="fas fa-lg fa-building"></i></span> Філія: {{ $barber->branch->title }}
+                                                            class="fas fa-lg fa-building"></i></span> Філія: {{ $employee->branch ? $employee->branch->title : '-' }}
                                                 </li>
                                                 <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
-                                                    Телефон: 0{{ $barber->phone }}
+                                                    Телефон: 0{{ $employee->phone }}
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="col-5 text-center">
-                                            @if($barber->image)
-                                                <img src="{{ asset('storage/' . $barber->image) }}" alt="{{ $barber->fullName }}" style="width: 128px; height: 128px;"
+                                            @if($employee->image)
+                                                <img src="{{ asset('storage/' . $employee->image) }}" alt="{{ $employee->fullName }}" style="width: 128px; height: 128px;"
                                                     class="img-circle img-fluid">
                                             @else
                                                 <div style="width: 128px; height: 128px; justify-content: center; align-items: center; display: flex; border: 1px solid grey; border-radius: 50%; margin: 0 auto;">
@@ -83,15 +83,15 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-right d-flex justify-content-end">
-                                        <form action="{{ route('barber.destroy', $barber->id) }}" method="post" class="mr-1">
+                                        <form action="{{ route('employee.destroy', $employee->id) }}" method="post" class="mr-1">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" class="btn btn-sm bg-teal"><i class="fas fa-trash-alt"></i></button>
                                         </form>
-                                        <a href="{{ route('barber.edit', $barber->id) }}" class="btn btn-sm bg-teal mr-1">
+                                        <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-sm bg-teal mr-1">
                                             <i class="fas fa-pen"></i>
                                         </a>
-                                        <a href="{{ route('barber.show', $barber->id) }}" class="btn btn-sm btn-primary">
+                                        <a href="{{ route('employee.show', $employee->id) }}" class="btn btn-sm btn-primary">
                                             <i class="fas fa-user"></i> Переглянути
                                         </a>
                                     </div>

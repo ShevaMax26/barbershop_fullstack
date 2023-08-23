@@ -7,9 +7,9 @@ use App\Models\Rank;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Barber>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
  */
-class BarberFactory extends Factory
+class EmployeeFactory extends Factory
 {
     public function definition()
     {

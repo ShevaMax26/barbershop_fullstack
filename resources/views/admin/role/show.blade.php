@@ -26,9 +26,9 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left mr-5 text-white"></i></a>
-                                <a href="{{ route('user.role.edit', $role->id) }}" class="btn btn-warning mr-3">Edit</a>
-                                <form action="{{ route('user.role.destroy', $role->id) }}" method="post">
+                                <a href="{{ route('employee.role.index') }}"><i class="fas fa-arrow-circle-left mr-5 text-white"></i></a>
+                                <a href="{{ route('employee.role.edit', $role->id) }}" class="btn btn-warning mr-3">Edit</a>
+                                <form action="{{ route('employee.role.destroy', $role->id) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <input type="submit" class="btn btn-danger" value="Delete">

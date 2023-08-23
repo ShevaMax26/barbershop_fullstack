@@ -20,10 +20,10 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'edit orders']);
         Permission::firstOrCreate(['name' => 'delete orders']);
 
-        Permission::firstOrCreate(['name' => 'show barbers']);
-        Permission::firstOrCreate(['name' => 'create barbers']);
-        Permission::firstOrCreate(['name' => 'edit barbers']);
-        Permission::firstOrCreate(['name' => 'delete barbers']);
+        Permission::firstOrCreate(['name' => 'show employees']);
+        Permission::firstOrCreate(['name' => 'create employees']);
+        Permission::firstOrCreate(['name' => 'edit employees']);
+        Permission::firstOrCreate(['name' => 'delete employees']);
 
         Permission::firstOrCreate(['name' => 'show branches']);
         Permission::firstOrCreate(['name' => 'create branches']);
@@ -44,5 +44,15 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'create ranks']);
         Permission::firstOrCreate(['name' => 'edit ranks']);
         Permission::firstOrCreate(['name' => 'delete ranks']);
+
+        Permission::firstOrCreate(['name' => 'show roles']);
+        Permission::firstOrCreate(['name' => 'create roles']);
+        Permission::firstOrCreate(['name' => 'edit roles']);
+        Permission::firstOrCreate(['name' => 'delete roles']);
+
+        Permission::firstOrCreate(['name' => 'show users']);
+        Permission::firstOrCreate(['name' => 'create users']);
+        Permission::firstOrCreate(['name' => 'edit users']);
+        Permission::firstOrCreate(['name' => 'delete users']);
     }
 }

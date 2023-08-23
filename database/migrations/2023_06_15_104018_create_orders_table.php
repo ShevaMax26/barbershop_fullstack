@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Barber::class)
+            $table->foreignIdFor(\App\Models\Employee::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate()

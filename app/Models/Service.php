@@ -11,9 +11,9 @@ class Service extends Model
     protected $fillable = ['title', 'description'];
     protected static $unguarded = false;
 
-    public function barbers()
+    public function employees()
     {
-        return $this->belongsToMany(Barber::class);
+        return $this->belongsToMany(Employee::class);
     }
 
     public function serviceDetails()

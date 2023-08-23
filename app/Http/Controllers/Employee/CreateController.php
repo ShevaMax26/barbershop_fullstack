@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Barber;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
@@ -14,6 +14,6 @@ class CreateController extends Controller
         $ranks = Rank::all();
         $branches = Branch::all();
 
-        return view('admin.barber.create', compact('ranks', 'branches'));
+        return view('admin.employee.create', compact('ranks', 'branches'));
     }
 }

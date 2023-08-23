@@ -11,7 +11,7 @@ class IndexController extends Controller
 {
     public function __invoke()
     {
-        $users = User::with('roles')->paginate(10);
+        $users = User::paginate(10);
 
         return view('admin.user.index', compact('users'));
     }

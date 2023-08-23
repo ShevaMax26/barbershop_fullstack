@@ -18,10 +18,6 @@ class UpdateController extends Controller
             'name' => $data['name'],
         ]);
 
-        $role = Role::find($data['role_id']);
-
-        $user->syncRoles([$role->name]);
-
         return redirect()->route('user.show', compact('user'));
     }
 }

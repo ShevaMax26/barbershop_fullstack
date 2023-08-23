@@ -13,82 +13,88 @@
             {{--                    <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">--}}
             {{--                </div>--}}
             <div class="info">
-                <a href="#" class="d-block">Maxym Shevchuk</a>
+                <a href="#" class="d-block">{{ auth()->user()->name . ' (' . auth()->user()->roles->first()->name . ')'}}</a>
             </div>
         </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="{{ route('order.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-briefcase"></i>
-                        <p>Замовлення</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('barber.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user-tie"></i>
-                        <p>Барбери</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('branch.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-building"></i>
-                        <p>Філії</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('service.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-cut"></i>
-                        <p>
-                            Послуги
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('service-detail.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-coins"></i>
-                        <p>Ціни та час</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('rank.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-award"></i>
-                        <p>Ранги</p>
-                    </a>
-                </li>
-                @role('super-admin')
+                @can('show orders')
+                    <li class="nav-item">
+                        <a href="{{ route('order.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>Замовлення</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show employees')
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-user"></i>
+                            <i class="nav-icon fas fa-user-tie"></i>
                             <p>
-                                Користувачі
+                                Працівники
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview" style="display: none;">
+                            @can('show roles')
+                                <li class="nav-item">
+                                    <a href="{{ route('employee.role.index') }}" class="nav-link pl-4">
+                                        <i class="nav-icon fas fa-crown"></i>
+                                        <p>Ролі</p>
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="nav-item">
-                                <a href="{{ route('user.role.index') }}" class="nav-link pl-4">
-                                    <i class="nav-icon fas fa-crown"></i>
-                                    <p>Ролі</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('user.role.index') }}" class="nav-link pl-4">
-                                    <i class="nav-icon fas fa-lock"></i>
-                                    <p>Права доступу</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('user.index') }}" class="nav-link pl-4">
+                                <a href="{{ route('employee.index') }}" class="nav-link pl-4">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>Перегляд</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                @endrole
+                @endcan
+                @can('show branches')
+                    <li class="nav-item">
+                        <a href="{{ route('branch.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-building"></i>
+                            <p>Філії</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show services')
+                        <li class="nav-item">
+                            <a href="{{ route('service.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-cut"></i>
+                                <p>Послуги</p>
+                            </a>
+                        </li>
+                @endcan
+                @can('show service details')
+                        <li class="nav-item">
+                            <a href="{{ route('service-detail.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-coins"></i>
+                                <p>Ціни та час</p>
+                            </a>
+                        </li>
+                @endcan
+                @can('show ranks')
+                    <li class="nav-item">
+                        <a href="{{ route('rank.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-award"></i>
+                            <p>Ранги барберів</p>
+                        </a>
+                    </li>
+                @endcan
+               @can('show users')
+                    <li class="nav-item">
+                        <a href="{{ route('user.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>Користувачі</p>
+                        </a>
+                    </li>
+               @endcan
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

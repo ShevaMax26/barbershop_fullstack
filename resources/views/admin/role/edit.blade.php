@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('user.role.update', $role->id) }}" method="post" class="w-25">
+                    <form action="{{ route('employee.role.update', $role->id) }}" method="post" class="w-25">
                         @csrf
                         @method('patch')
                         @if ($errors->any())
@@ -49,7 +49,7 @@
 
                         <div class="d-flex align-items-center">
                             <button type="submit" class="btn btn-warning">Update</button>
-                            <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                            <a href="{{ route('employee.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
                         </div>
                     </form>
                 </div>

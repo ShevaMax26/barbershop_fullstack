@@ -10,7 +10,7 @@ class BarberBranchController extends Controller
 {
     public function __invoke(Branch $branch)
     {
-        $barbers = $branch->barbers()->with('rank')->orderByDesc('rank_id')->get();
+        $barbers = $branch->employees()->with('rank')->orderByDesc('rank_id')->get();
 
         return BarberBranchResource::collection($barbers);
     }

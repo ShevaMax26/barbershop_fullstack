@@ -5,19 +5,31 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
-class Barber extends Model
+class Employee extends Authenticatable
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes, HasRoles;
     protected $fillable = [
         'name',
         'surname',
         'phone',
+        'email',
         'rank_id',
         'branch_id',
         'image',
+        'password',
     ];
+
+    protected $hidden = [
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
     protected static $unguarded = false;
 
     public function rank()

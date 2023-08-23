@@ -26,7 +26,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center justify-content-between">
-                                <a href="{{ route('user.role.create') }}" class="btn btn-primary">Створити</a>
+                                <a href="{{ route('employee.role.create') }}" class="btn btn-primary">Створити</a>
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -53,12 +53,12 @@
                                 @foreach($roles as $role)
                                     <tr>
                                         <td>{{ $role->id }}</td>
-                                        <td><a href="{{route('user.role.show', $role->id)}}" class="text-white">{{ $role->name }}</a></td>
+                                        <td><a href="{{route('employee.role.show', $role->id)}}" class="text-white">{{ $role->name }}</a></td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('user.role.show', $role->id) }}"><i class="far fa-eye mr-3"></i></a>
-                                                <a href="{{ route('user.role.edit', $role->id) }}"><i class="fas fa-pen text-warning mr-3"></i></a>
-                                                <form action="{{ route('user.role.destroy', $role->id) }}" method="post">
+                                                <a href="{{ route('employee.role.show', $role->id) }}"><i class="far fa-eye mr-3"></i></a>
+                                                <a href="{{ route('employee.role.edit', $role->id) }}"><i class="fas fa-pen text-warning mr-3"></i></a>
+                                                <form action="{{ route('employee.role.destroy', $role->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="bg-transparent border-0"><i class="fas fa-trash-alt text-danger"></i></button>

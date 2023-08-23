@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Barber;
+namespace App\Http\Requests\Employee;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     public function authorize()
     {
@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
             'name' => 'required|string',
             'surname' => 'required|string',
             'phone' => 'required|integer',
-            'rank_id' => 'required|integer|exists:ranks,id',
+            'rank_id' => 'nullable|integer|exists:ranks,id',
             'branch_id' => 'required|integer|exists:branches,id',
             'image' => 'nullable|file',
         ];

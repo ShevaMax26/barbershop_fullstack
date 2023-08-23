@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Barber;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Barber\StoreRequest;
-use App\Models\Barber;
+use App\Http\Requests\Employee\StoreRequest;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Storage;
 
 class StoreController extends Controller
@@ -14,10 +14,10 @@ class StoreController extends Controller
         $data = $request->validated();
         $data['image'] = Storage::disk('public')->put('images', $data['image']);
 
-        Barber::firstOrCreate([
+        Employee::firstOrCreate([
             'phone' => $data['phone'],
         ], $data);
 
-        return redirect()->route('barber.index');
+        return redirect()->route('employee.index');
     }
 }

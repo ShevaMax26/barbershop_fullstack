@@ -11,9 +11,9 @@ class Rank extends Model
     protected $fillable = ['title'];
     protected static $unguarded = false;
 
-    public function barbers()
+    public function employees()
     {
-        return $this->hasMany(Barber::class);
+        return $this->hasMany(Employee::class);
     }
 
     public function serviceDetails()

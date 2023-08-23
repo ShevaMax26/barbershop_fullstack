@@ -6,11 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Створення барбера</h1>
+                    <h1 class="m-0">Створення працівника</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Барбери</li>
+                        <li class="breadcrumb-item active">Працівники</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('barber.store') }}" method="post" class="w-25" enctype="multipart/form-data">
+                    <form action="{{ route('employee.store') }}" method="post" class="w-25" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Ім'я:</label>
@@ -38,7 +38,7 @@
                             <input type="tel" name="phone" class="form-control mb-3" maxlength="9" value="{{ old('phone') }}">
                         </div>
                         <div class="form-group">
-                            <label for="rank_id">Ранг барбера:</label>
+                            <label for="rank_id">Ранг працівника:</label>
                             <select name="rank_id" class="form-control">
                                 <option selected="selected" disabled>-</option>
                                 @foreach($ranks as $rank)
@@ -69,7 +69,7 @@
                         </div>
                         <div class="d-flex align-items-center">
                             <button type="submit" class="btn btn-success">Створити</button>
-                            <a href="{{ route('barber.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                            <a href="{{ route('employee.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
                         </div>
                     </form>
                 </div>

@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Barber;
 use App\Models\User;
+use Database\Seeders\RolePermission\AdminPermissionSeeder;
+use Database\Seeders\RolePermission\BarberPermissionSeeder;
+use Database\Seeders\RolePermission\ManagerPermissionSeeder;
+use Database\Seeders\RolePermission\RoleSeeder;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,16 +18,17 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             RankSeeder::class,
             ServiceSeeder::class,
-            BarberSeeder::class,
             RoleSeeder::class,
-            SuperAdminSeeder::class,
             PermissionSeeder::class,
+            AdminPermissionSeeder::class,
+            ManagerPermissionSeeder::class,
+            BarberPermissionSeeder::class,
+            EmployeeSeeder::class,
+            SuperAdminSeeder::class,
         ]);
 
-        Barber::factory(5)->create();
+//        Employee::factory(5)->create();
 
-        User::factory()->count(10)->create()->each(function ($user) {
-            $user->assignRole('user');
-        });
+        User::factory()->count(10)->create();
     }
 }

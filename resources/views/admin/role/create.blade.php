@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <form action="{{ route('user.role.store') }}" method="post" class="w-25">
+                    <form action="{{ route('employee.role.store') }}" method="post" class="w-25">
                         @csrf
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -45,7 +45,7 @@
 
                         <div class="d-flex align-items-center">
                             <button type="submit" class="btn btn-success">Створити</button>
-                            <a href="{{ route('user.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
+                            <a href="{{ route('employee.role.index') }}"><i class="fas fa-arrow-circle-left ml-3 text-white"></i></a>
                         </div>
                     </form>
                 </div>

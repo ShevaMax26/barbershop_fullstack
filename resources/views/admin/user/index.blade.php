@@ -5,11 +5,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Замовлення</h1>
+                    <h1 class="m-0">Користувачі</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item active">Замовлення</li>
+                        <li class="breadcrumb-item active">Користувачі</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -42,7 +42,6 @@
                             <th>ID</th>
                             <th>Ім'я</th>
                             <th>Email</th>
-                            <th>Роль</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -52,13 +51,6 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>
-                                    @forelse($user->roles as $role)
-                                        {{ $role->name }}
-                                    @empty
-                                        -
-                                    @endforelse
-                                </td>
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <a href="{{ route('user.show', $user->id) }}"><i class="far fa-eye mr-3"></i></a>

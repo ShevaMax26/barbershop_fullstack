@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 
 class DestroyController extends Controller
 {
-    public function __invoke(Role $role)
+    public function __invoke(User $user)
     {
-        $role->delete();
+        $user->delete();
 
-        return redirect()->route('role.index');
+        return redirect()->route('user.index');
     }
 }

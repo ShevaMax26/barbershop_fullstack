@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Barber;
+namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Models\Barber;
 use App\Models\Branch;
+use App\Models\Employee;
 use App\Models\Rank;
 
 class EditController extends Controller
 {
-    public function __invoke(Barber $barber)
+    public function __invoke(Employee $employee)
     {
         $ranks = Rank::all();
         $branches = Branch::all();
-        return view('admin.barber.edit', compact('barber', 'ranks', 'branches'));
+        return view('admin.employee.edit', compact('employee', 'ranks', 'branches'));
     }
 }

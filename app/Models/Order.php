@@ -28,7 +28,7 @@ class Order extends Model
         }
     }
     protected $fillable = [
-        'barber_id',
+        'employee_id',
         'date',
         'start',
         'end',
@@ -43,9 +43,14 @@ class Order extends Model
         return $this->belongsTo(Branch::class);
     }
 
-    public function barber()
+    public function employee()
     {
-        return $this->belongsTo(Barber::class);
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function services()

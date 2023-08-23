@@ -2,7 +2,7 @@
 
 use App\Http\Controllers;
 use App\Http\Controllers\Client;
-use App\Http\Controllers\Barber;
+use App\Http\Controllers\Employee;
 use App\Http\Controllers\Branch;
 use App\Http\Controllers\Rank;
 use App\Http\Controllers\Role;
@@ -26,14 +26,24 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', Controllers\Main\IndexController::class)->name('main.index');
 
-    Route::group(['prefix' => 'barbers'], function () {
-        Route::get('/', Barber\IndexController::class)->name('barber.index');
-        Route::get('/create', Barber\CreateController::class)->name('barber.create');
-        Route::post('/', Barber\StoreController::class)->name('barber.store');
-        Route::get('/{barber}', Barber\ShowController::class)->name('barber.show');
-        Route::get('/{barber}/edit', Barber\EditController::class)->name('barber.edit');
-        Route::patch('/{barber}', Barber\UpdateController::class)->name('barber.update');
-        Route::delete('/{barber}', Barber\DestroyController::class)->name('barber.destroy');
+    Route::group(['prefix' => 'employees'], function () {
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', Role\IndexController::class)->name('employee.role.index');
+            Route::get('/create', Role\CreateController::class)->name('employee.role.create');
+            Route::post('/', Role\StoreController::class)->name('employee.role.store');
+            Route::get('/{role}', Role\ShowController::class)->name('employee.role.show');
+            Route::get('/{role}/edit', Role\EditController::class)->name('employee.role.edit');
+            Route::patch('/{role}', Role\UpdateController::class)->name('employee.role.update');
+            Route::delete('/{role}', Role\DestroyController::class)->name('employee.role.destroy');
+        });
+
+        Route::get('/', Employee\IndexController::class)->name('employee.index');
+        Route::get('/create', Employee\CreateController::class)->name('employee.create');
+        Route::post('/', Employee\StoreController::class)->name('employee.store');
+        Route::get('/{employee}', Employee\ShowController::class)->name('employee.show');
+        Route::get('/{employee}/edit', Employee\EditController::class)->name('employee.edit');
+        Route::patch('/{employee}', Employee\UpdateController::class)->name('employee.update');
+        Route::delete('/{employee}', Employee\DestroyController::class)->name('employee.destroy');
     });
 
     Route::group(['prefix' => 'branches'], function () {
@@ -84,17 +94,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 //        Route::delete('/{order}', Order\DestroyController::class)->name('order.destroy');
     });
 
-    Route::group(['prefix' => 'users', 'middleware' => 'role:super-admin'], function () {
-        Route::group(['prefix' => 'roles'], function () {
-            Route::get('/', Role\IndexController::class)->name('user.role.index');
-            Route::get('/create', Role\CreateController::class)->name('user.role.create');
-            Route::post('/', Role\StoreController::class)->name('user.role.store');
-            Route::get('/{role}', Role\ShowController::class)->name('user.role.show');
-            Route::get('/{role}/edit', Role\EditController::class)->name('user.role.edit');
-            Route::patch('/{role}', Role\UpdateController::class)->name('user.role.update');
-            Route::delete('/{role}', Role\DestroyController::class)->name('user.role.destroy');
-        });
-
+    Route::group(['prefix' => 'users'], function () {
         Route::get('/', User\IndexController::class)->name('user.index');
         Route::get('/{user}', User\ShowController::class)->name('user.show');
         Route::get('/{user}/edit', User\EditController::class)->name('user.edit');

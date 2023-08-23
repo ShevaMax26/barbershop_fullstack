@@ -11,6 +11,6 @@ class DestroyController extends Controller
     {
         $role->delete();
 
-        return redirect()->route('user.role.index');
+        return redirect()->route('employee.role.index');
     }
 }
