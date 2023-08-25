@@ -45,19 +45,22 @@
                     @foreach($employees as $employee)
                         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
                             <div class="card bg-light d-flex flex-fill">
-                                <div class="card-header text-muted border-bottom-0">
-                                    {{ $employee->rank ? $employee->rank->title : '-'}}
-                                </div>
-                                <div class="card-body pt-0">
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-7">
+                                            <div class="mb-2">
+                                                <div style="color: #3f6791; width: fit-content; border: 1px  #3f6791 solid; border-radius: 5px; text-align: center; padding: 1px 5px">
+                                                    {{ $employee->roles ? $employee->roleName : '-'}}
+                                                </div>
+                                                <div class="mt-1 text-muted">{{ $employee->rank ? $employee->rank->title : ''}}</div>
+                                            </div>
                                             <h2 class="lead"><b>{{ $employee->fullName }}</b></h2>
                                             <p class="text-muted text-sm"><b>Відгуки: </b>
-                                                <i class="fas fa-star" style="color: #ffcb00;"></i>
-                                                <i class="fas fa-star" style="color: #ffcb00;"></i>
-                                                <i class="fas fa-star" style="color: #ffcb00;"></i>
-                                                <i class="fas fa-star" style="color: #ffcb00;"></i>
-                                                <i class="far fa-star" style="color: #ffcb00;"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="far fa-star text-warning"></i>
                                                 (201)
                                             </p>
                                             <ul class="ml-4 mb-0 fa-ul text-muted">

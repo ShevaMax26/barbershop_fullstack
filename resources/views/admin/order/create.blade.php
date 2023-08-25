@@ -53,13 +53,13 @@
                         </div>
                         <div class="form-group">
                             <label for="">Майстер:</label>
-                            <select name="barber_id" class="form-control">
+                            <select name="employee_id" class="form-control">
                                 <option selected="selected" disabled>-</option>
-                                @foreach($barbers as $barber)
-                                    <option value="{{ $barber->id }}" {{ $barber->id == old('barber_id') ? 'selected' : '' }}>{{ $barber->fullName }}</option>
+                                @foreach($employees as $employee)
+                                    <option value="{{ $employee->id }}" {{ $employee->id == old('employee_id') ? 'selected' : '' }}>{{ $employee->fullName }}</option>
                                 @endforeach
                             </select>
-                            @error('barber_id')
+                            @error('employee_id')
                             <div>{{ $message }}</div>
                             @enderror
                         </div>

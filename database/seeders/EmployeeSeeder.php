@@ -17,7 +17,7 @@ class EmployeeSeeder extends Seeder
                 'name' => 'Євген',
                 'surname' => 'Федорук',
                 'phone' => 111111111,
-                'email' => 'user1@gmail.com',
+                'email' => 'barber@gmail.com',
                 'password' => Hash::make('1234'),
                 'rank_id' => 4,
                 'branch_id' => 1,

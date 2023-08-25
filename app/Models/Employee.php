@@ -46,4 +46,19 @@ class Employee extends Authenticatable
     {
         return $this->name . ' ' . $this->surname;
     }
+
+    public function getRoleNameAttribute(): string
+    {
+        $roleName = $this->roles->first()->name;
+
+        $formattedRoleName = match ($roleName) {
+            'super-admin' => 'Ceпер Адмін',
+            'admin' => 'Адмін',
+            'manager' => 'Менеджер',
+            'barber' => 'Барбер',
+            default => $roleName,
+        };
+
+        return $formattedRoleName;
+    }
 }

@@ -15,6 +15,11 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate()
                 ->nullable();
+            $table->foreignIdFor(\App\Models\User::class)
+                ->nullable()
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->date('date');
             $table->time('start');
             $table->time('end');
