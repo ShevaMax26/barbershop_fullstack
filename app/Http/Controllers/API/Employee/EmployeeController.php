@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\Barber;
+namespace App\Http\Controllers\API\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Barber\AvailableHourRequest;
 use App\Http\Resources\Barber\BarberServiceResource;
-use App\Models\Barber;
+use App\Models\Employee;
 use App\Models\Order;
 use App\Models\ServiceDetail;
 use Carbon\Carbon;
@@ -13,16 +13,16 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\Request;
 
-class BarberController extends Controller
+class EmployeeController extends Controller
 {
-    public function getServices(Request $request, Barber $barber)
+    public function getServices(Request $request, Employee $employee)
     {
-        $services = $barber->rank->serviceDetails()->with('service')->orderBy('service_id', 'asc')->get();
+        $services = $employee->rank->serviceDetails()->with('service')->orderBy('service_id', 'asc')->get();
 
         return BarberServiceResource::collection($services);
     }
 
-    public function getAvailableHours(AvailableHourRequest $request, Barber $barber)
+    public function getAvailableHours(AvailableHourRequest $request, Employee $employee)
     {
         $data = $request->validated();
 
@@ -36,13 +36,13 @@ class BarberController extends Controller
 
         $endDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $date . ' 22:00:00');
 
-        $rankId = $barber->rank_id;
+        $rankId = $employee->rank_id;
 
         $servicesTime = ServiceDetail::where('rank_id', $rankId)->whereIn('service_id', $data['services'])->sum('duration');
 
         $availableHours = [];
 
-        $dateOrders = Order::where('barber_id', $barber->id)->where('date', $date)->get();
+        $dateOrders = Order::where('employee_id', $employee->id)->where('date', $date)->get();
 
         // Перебираємо час з інтервалом 30 хвилин
         while ($startDateTime <= $endDateTime) {

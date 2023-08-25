@@ -52,7 +52,7 @@
                             @include('admin.includes.sort', ['field' => 'branches', 'name' => 'Філія'])
                         </th>
                         <th style="width: 10%">
-                            @include('admin.includes.sort', ['field' => 'barber_id', 'name' => 'Майстер'])
+                            @include('admin.includes.sort', ['field' => 'employee_id', 'name' => 'Майстер'])
                         </th>
                         <th>
                             @include('admin.includes.sort', ['field' => 'services_count', 'name' => 'Послуги'])
@@ -80,12 +80,12 @@
                                         0{{ $order->customer_phone }}
                                     </small>
                                 </td>
-                                <td>{{ str_replace('GC barbershop ', '', $order->barber->branch->title) }}</td>
+                                <td>{{ str_replace('GC barbershop ', '', $order->employee->branch->title) }}</td>
                                 <td>
-                                    <a href="{{ route('barber.show', $order->barber->id) }}">
-                                        @if($order->barber->image)
-                                            <img alt="{{ $order->barber->fullName }}" class="table-avatar rounded"
-                                                 src="{{ asset('storage/' . $order->barber->image) }}"
+                                    <a href="{{ route('employee.show', $order->employee->id) }}">
+                                        @if($order->employee->image)
+                                            <img alt="{{ $order->employee->fullName }}" class="table-avatar rounded"
+                                                 src="{{ asset('storage/' . $order->employee->image) }}"
                                                  style="width: 48px; height: 48px;">
                                         @else
                                             <div style="align-items: center; display: flex;">

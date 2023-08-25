@@ -14,8 +14,8 @@ class CreateController extends Controller
     public function __invoke()
     {
         $branches = Branch::all();
-        $employees = Employee::all();
-        $services = Service::all();
-        return view('admin.order.create', compact('branches', 'employees', 'services'));
+//        $employees = Employee::all();
+//        $services = Service::all();
+        return view('admin.order.create', compact('branches'));
     }
 }

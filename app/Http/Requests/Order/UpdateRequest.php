@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'branch_id' => 'required|integer|exists:branches,id',
-            'barber_id' => 'required|integer|exists:barbers,id',
+            'employee_id' => 'required|integer|exists:employees,id',
             'scheduled_time' => 'required|date',
             'customer_name' => 'required|string',
             'customer_phone' => 'required|integer',

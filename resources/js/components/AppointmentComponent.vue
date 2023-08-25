@@ -172,7 +172,7 @@ export default {
         appointment() {
             console.log(this.selectedServices);
             this.axios.post('/api/orders', {
-                'barber_id': this.selectedBarber,
+                'employee_id': this.selectedBarber,
                 'services': this.selectedServices,
                 'customer_name': this.name,
                 'customer_phone': this.phone,

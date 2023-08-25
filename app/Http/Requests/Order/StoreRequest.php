@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'branch_id' => 'required|integer|exists:branches,id',
-            'barber_id' => 'required|integer|exists:barbers,id',
+            'employee_id' => 'required|integer|exists:employees,id',
             'user_id' => 'nullable|integer|exists:users,id',
             'scheduled_time' => 'required|date',
             'customer_name' => 'required|string',

@@ -16,19 +16,19 @@ class IndexController extends Controller
         $sortField = $request->input('sort', 'id');
         $sortDirection = $request->input('direction', 'asc');
 
-        $orders = Order::with(['branch', 'barber', 'services'])
+        $orders = Order::with(['branch', 'employee', 'services'])
             ->withSum('services', 'order_services.price')
             ->withCount('services')
             ->when($request->input('search'), function (Builder $q) use ($request) {
                 return $q->where('customer_name', $request->input('search'));
             })
             ->when($sortField === 'branches', function ($q) use ($sortDirection) {
-                return $q->join('barbers', 'orders.barber_id', '=', 'barbers.id')
-                    ->join('branches', 'barbers.branch_id', '=', 'branches.id')
+                return $q->join('employees', 'orders.employee_id', '=', 'employees.id')
+                    ->join('branches', 'employees.branch_id', '=', 'branches.id')
                     ->orderBy('branches.title', $sortDirection)
                     ->select('orders.*');
             })
-            ->when(in_array($sortField, ['id', 'customer_name', 'barber_id', 'date', 'services_sum_order_servicesprice', 'services_count']), function ($q) use ($sortField, $sortDirection) {
+            ->when(in_array($sortField, ['id', 'customer_name', 'employee_id', 'date', 'services_sum_order_servicesprice', 'services_count']), function ($q) use ($sortField, $sortDirection) {
                 return $q->orderBy($sortField, $sortDirection);
             })
             ->paginate(10);

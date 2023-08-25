@@ -12,8 +12,8 @@ class BarberBranchResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'surname' => $this->surname,
-            'rank_id' => $this->rank->id,
-            'rank_title' => $this->rank->title,
+            'rank_id' => optional($this->rank)->id,
+            'rank_title' => optional($this->rank)->title,
         ];
     }
 }
