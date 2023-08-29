@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import API from "@/api";
 
 export default {
     name: 'AppointmentComponent',
@@ -171,7 +172,7 @@ export default {
         },
         appointment() {
             console.log(this.selectedServices);
-            this.axios.post('/api/orders', {
+            API.post('/api/orders', {
                 'employee_id': this.selectedBarber,
                 'services': this.selectedServices,
                 'customer_name': this.name,

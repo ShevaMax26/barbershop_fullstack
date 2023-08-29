@@ -29,6 +29,7 @@ class Order extends Model
     }
     protected $fillable = [
         'employee_id',
+        'user_id',
         'date',
         'start',
         'end',
