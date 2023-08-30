@@ -63,7 +63,6 @@ export default {
             API.get('/api/cabinet/personal-info')
                 .then(res => {
                     this.user = res.data.data;
-                    console.log(this.user);
                 })
         },
     }
