@@ -1,0 +1,36 @@
+@import "/resources/scss/variables";
+
+.cabinet-btn {
+    font-weight: 700;
+    text-decoration: none;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    -webkit-user-select: none;
+    transition: all 0.5s;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.cabinet-content {
+
+    &__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 50px;
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        font-size: 24px;
+    }
+
+    &__content {
+        border: 1px solid #e6e6e6;
+        border-radius: 5px;
+        box-shadow: 0 0 5px 0.5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        padding: 30px;
+    }
+}

@@ -4,7 +4,7 @@ namespace App\Http\Resources\Cabinet;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CabinetResource extends JsonResource
+class UserPersonalInfoResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

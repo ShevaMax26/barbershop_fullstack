@@ -30,7 +30,7 @@ Route::group(['prefix' => 'auth'], function ($router) {
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => 'cabinet'], function () {
-        Route::get('/', Cabinet\CabinetController::class);
+        Route::get('/personal-info', [Cabinet\UserPersonalInfo::class, 'getPersonalInfo']);
 
         Route::get('/profile', function () {
             return 'Home page';
