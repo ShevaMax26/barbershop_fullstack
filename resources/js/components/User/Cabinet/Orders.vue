@@ -353,14 +353,15 @@ export default {
     },
 
     mounted() {
-        this.getUserPersonalInfo()
+        this.getOrders()
     },
 
     methods: {
-        getUserPersonalInfo() {
-            API.get('/api/cabinet/personal-info')
+        getOrders() {
+            API.get('/api/cabinet/orders')
                 .then(res => {
                     this.orders = res.data.data;
+                    console.log(this.orders);
                 })
         },
     }
