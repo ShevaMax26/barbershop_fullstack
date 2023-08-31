@@ -8,34 +8,314 @@
             </div>
 
             <div class="cabinet-content__content">
-
+                <h4 class="cabinet-content__category">Активні</h4>
                 <div class="orders-history">
-                    <p class="orders-history__datetime">
-                        сб, 15 липня, 13:30 - 15:00
-                    </p>
-                    <p class="orders-history__company-address">
-                        вулиця Сухомлинського, 1
-                    </p>
-                    <div class="orders-history__employee employee">
-                        <img src="/5.png" alt="avatar" class="employee__avatar">
-                        <div class="employee__info">
-                            <p class="employee__name">Кирило Олійник</p>
-                            <p class="employee__rank">Стажер</p>
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="line"></div>
-
                     <div class="orders-history__services services">
-                        <p class="services__price">150$</p>
-                        <p class="services__duration">60хв</p>
-                        <p class="services__title">Стрижка</p>
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
                     </div>
 
-                    <div class="orders-history__actions actions">
-                        <button class="cabinet-btn actions__btn">Залишити відгук</button>
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Скасувати</button>
                     </div>
                 </div>
+<!--                <div class="line"></div>-->
+                <h4 class="cabinet-content__category">Минулі</h4>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="orders-history">
+                    <div class="orders-history__company">
+                        <p class="orders-history__datetime">
+                            сб, 15 липня, 13:30 - 15:00
+                        </p>
+                        <p class="orders-history__company-address">
+                            вулиця Сухомлинського, 1
+                        </p>
+                        <div class="orders-history__employee employee">
+                            <img src="/5.png" alt="avatar" class="employee__avatar">
+                            <div class="employee__info">
+                                <p class="employee__name">Кирило Олійник</p>
+                                <p class="employee__rank">Стажер</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="orders-history__services services">
+                        <p class="services__title">Чоловіча Стрижка,</p>
+                        <p class="services__title">Стрижка бороди,</p>
+                        <p class="services__title">Батько та син,</p>
+                        <p class="services__title">Стрижка,</p>
+                        <p class="services__title">Стрижка,</p>
+                    </div>
+
+                    <div class="orders-history__total total">
+                        <div class="total__info">
+                            <p class="total__price">150 ₴</p>
+                            <p class="total__duration">1 год. 45 хв.</p>
+                        </div>
+                        <button class="cabinet-btn total__btn">Залишити відгук</button>
+                    </div>
+                </div>
+                <div class="line"></div>
 
 
 <!--                .................-->
@@ -90,12 +370,59 @@ export default {
 <style lang="scss" scoped>
 @import "/resources/scss/global-cabinet.scss";
 
+.cabinet-content {
+
+    &__category {
+        text-align: center;
+        color: $yellow;
+        text-transform: uppercase;
+        margin: 10px 0 20px 0;
+        font-size: 14px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__content {
+        overflow: auto;
+        max-height: calc((99px + 40px) * 4 - 40px + 60px + 5px);
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: hsla(0,0%,75%,.5);
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        outline: 1px solid $gray;
+        background: $gray;
+        border-radius: 10px;
+
+        &:hover {
+            border: 1px solid $gray-dark;
+            background: $gray-dark;
+            outline-color: $gray-dark;
+        }
+    }
+}
 .orders-history {
     font-size: 15px;
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
 
     &__datetime {
         font-weight: 600;
         font-size: 17px;
+    }
+
+    &__company {
+        min-width: fit-content;
     }
 
     &__company-address {
@@ -108,11 +435,18 @@ export default {
     }
 
     &__services {
-
+        display: flex;
+        flex-wrap: wrap;
+        height: fit-content;
+        row-gap: 7px;
     }
 
-    &__actions {
-        margin-top: 16px;
+    &__total {
+        min-width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: end;
     }
 }
 
@@ -135,9 +469,18 @@ export default {
 
 .services {
 
+    &__title {
+        margin-right: 7px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+}
+
+.total {
+
     &__price {
         font-weight: 500;
-        font-size: 17px;
+        font-size: 20px;
         display: inline;
         margin-right: 10px;
     }
@@ -146,15 +489,6 @@ export default {
         display: inline;
         color: $gray;
     }
-
-    &__title {
-        margin-top: 5px;
-        font-weight: 500;
-        text-transform: uppercase;
-    }
-}
-
-.actions {
 
     &__btn {
         border: 2px solid $yellow;
@@ -189,7 +523,11 @@ export default {
 .line {
     width: 100%;
     height: 1px;
-    margin: 20px 0 16px 0;
+    margin: 20px 0;
     background: $gray-light;
+
+    &:last-child {
+        display: none;
+    }
 }
 </style>
