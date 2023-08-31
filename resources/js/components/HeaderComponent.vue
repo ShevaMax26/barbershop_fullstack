@@ -29,12 +29,6 @@
                         <li class="navbar-item">
                             <router-link :to="accessToken ? {name: 'user.cabinet'} : {name: 'user.login'}" class="navbar-link"><i class="fas fa-user"></i></router-link>
                         </li>
-
-                        <li class="navbar-item">
-                            <a v-if="accessToken" @click.prevent="logout" href="#" class="navbar-link">
-                                <i class="fas fa-sign-out-alt"></i>
-                            </a>
-                        </li>
                     </ul>
                 </nav>
 
@@ -52,10 +46,7 @@
 </template>
 
 <script>
-import API from "@/api";
 export default {
-    name: 'HeaderComponent',
-
     data() {
         return {
             accessToken: null,
@@ -73,14 +64,6 @@ export default {
     methods: {
         getAccessToken() {
             this.accessToken = localStorage.getItem('access_token')
-        },
-
-        logout() {
-            API.post('/api/auth/logout')
-                .then(res => {
-                    localStorage.removeItem('access_token')
-                    this.$router.push({name: 'user.login'})
-                })
         },
     }
 }

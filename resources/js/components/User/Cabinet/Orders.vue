@@ -319,19 +319,19 @@
 
 
 <!--                .................-->
-<!--                <div>-->
-<!--                    <div class="orders-history__not-found not-found">-->
-<!--                        <i class="not-found__icon far fa-frown"></i>-->
-<!--                        <div class="not-found__title">-->
-<!--                            Ви не здійснили жодного запису-->
-<!--                        </div>-->
-<!--                        <div class="not-found__text">-->
-<!--                            Перейдіть у розділ записатися-->
-<!--                        </div>-->
-<!--                        <router-link :to="{ name: 'services' }" class="not-found__btn cabinet-content__edit cabinet-btn">Записатися</router-link>-->
-<!--                    </div>-->
-<!--                    <PreloaderComponent></PreloaderComponent>-->
-<!--                </div>-->
+                <div>
+                    <div class="orders-history__not-found not-found">
+                        <i class="not-found__icon far fa-frown"></i>
+                        <div class="not-found__title">
+                            Ви не здійснили жодного запису
+                        </div>
+                        <div class="not-found__text">
+                            Перейдіть у розділ записів
+                        </div>
+                        <router-link :to="{ name: 'services' }" class="not-found__btn cabinet-content__edit cabinet-btn">Записатися</router-link>
+                    </div>
+                    <PreloaderComponent></PreloaderComponent>
+                </div>
             </div>
         </div>
     </div>

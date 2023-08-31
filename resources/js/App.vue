@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <HeaderComponent :key="$route.fullPath"></HeaderComponent>
+        <HeaderComponent></HeaderComponent>
 
         <div class="main">
             <router-view></router-view>

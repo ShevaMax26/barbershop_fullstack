@@ -22,6 +22,13 @@ const router = createRouter({
                     path: 'profile',
                     name: 'user.cabinet.profile',
                     component: () => import('../components/User/Cabinet/PersonalInformation.vue'),
+                    children: [
+                        {
+                            path: 'edit-profile',
+                            name: 'user.cabinet.profile.edit',
+                            component: () => import('../components/User/Cabinet/EditPersonalInformation.vue')
+                        }
+                    ]
                 },
                 {
                     path: 'messages',

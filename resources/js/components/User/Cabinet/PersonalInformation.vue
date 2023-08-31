@@ -2,17 +2,19 @@
     <div>
         <div class="cabinet-content">
             <div class="cabinet-content__head">
-                <h3 class="cabinet-content__title">
-                    Особисті дані
-                </h3>
-                <a class="cabinet-btn cabinet-content__edit">Редагувати</a>
+                <h3 v-if="!isEditProfileRoute" class="cabinet-content__title">Особисті дані</h3>
+                <h3 v-if="isEditProfileRoute" class="cabinet-content__title">Редагувати особисті дані</h3>
+                <router-link v-if="!isEditProfileRoute" :to="{ name: 'user.cabinet.profile.edit' }" class="cabinet-btn cabinet-content__edit">
+                    Редагувати
+                </router-link>
             </div>
 
             <div class="cabinet-content__content">
-                <div v-if="user" class="profile-info">
+                <div v-if="user && !isEditProfileRoute" class="profile-info">
                     <h4 class="profile-info__name">{{ user.name }}</h4>
                     <table class="profile-info__table">
-                        <tbody><tr>
+                        <tbody>
+                        <tr>
                             <td>Телефон:</td>
                             <td><span class="input-phone">-----</span></td>
                         </tr>
@@ -31,9 +33,16 @@
                         </tbody>
                     </table>
                 </div>
-                <div v-else>
+
+                <div v-else-if="!user">
                     <PreloaderComponent></PreloaderComponent>
                 </div>
+
+                <router-view></router-view>
+<!--                <div v-else>-->
+<!--                </div>-->
+
+
             </div>
         </div>
     </div>
@@ -43,6 +52,8 @@
 <script>
 import API from "@/api";
 import PreloaderComponent from "../../PreloaderComponent.vue";
+import EditPersonalInformation from "./EditPersonalInformation.vue";
+
 export default {
     data() {
         return {
@@ -52,6 +63,13 @@ export default {
 
     components: {
         PreloaderComponent,
+        EditPersonalInformation,
+    },
+
+    computed: {
+        isEditProfileRoute() {
+            return this.$route.name === 'user.cabinet.profile.edit';
+        },
     },
 
     mounted() {
