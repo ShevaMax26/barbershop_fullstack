@@ -25,8 +25,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'phone' => 'required|string|min:9',
             'email' => 'required|email',
-            'role_id' => 'required|integer|exists:roles,id',
         ];
     }
 
@@ -34,9 +34,10 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name.required' => 'Введіть ім\'я',
+            'phone.required' => 'Введіть номер телефону',
+            'phone.min' => 'Телефон повинен бути не менше 12 символів.',
             'email.required' => 'Введіть email',
             'email.email' => 'Невірний формат email',
-            'role_id.required' => 'Виберіть роль',
         ];
     }
 }

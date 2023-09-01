@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Cabinet;
 use App\Http\Controllers\User;
+use App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,8 +32,11 @@ Route::group(['prefix' => 'auth'], function ($router) {
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => 'cabinet'], function () {
         Route::get('/personal-info', [Cabinet\UserPersonalInfoController::class, 'getPersonalInfo']);
-
         Route::get('/orders', [Cabinet\UserOrdersController::class, 'getOrders']);
+    });
+
+    Route::group(['prefix' => 'users'], function () {
+        Route::post('/update', API\User\UpdateController::class);
     });
 });
 

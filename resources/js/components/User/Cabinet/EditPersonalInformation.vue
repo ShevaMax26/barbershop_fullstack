@@ -1,31 +1,35 @@
 <template>
-    <div v-if="user" class="profile-form">
+    <div v-if="!loading" class="profile-form">
 
         <div class="profile-form__group">
-            <input type="text" id="name" class="form-input profile-form__input" placeholder=" " :value="user.name">
+            <input type="text" id="name" class="form-input profile-form__input" placeholder=" " v-model="name">
             <label for="name" class="profile-form__label">Ім'я</label>
         </div>
         <div class="profile-form__group">
-            <input type="tel" id="phone" class="form-input profile-form__input" placeholder=" " :value="user.phone">
+            <input type="text"
+                   id="phone"
+                   class="form-input profile-form__input"
+                   placeholder=" "
+                   @input="phoneMask"
+                   v-model="phone">
             <label for="phone" class="profile-form__label">Телефон</label>
         </div>
         <div class="profile-form__group">
-            <input type="email" id="email" class="form-input profile-form__input" placeholder=" " :value="user.email">
+            <input type="email" id="email" class="form-input profile-form__input" placeholder=" " v-model="email">
             <label for="email" class="profile-form__label">Електронна пошта</label>
         </div>
 
-
         <div class="profile-form__actions">
-            <router-link :to="{ name: 'user.cabinet.profile' }" class="cabinet-btn profile-form__submit">
+            <a @click.prevent="updateUserPersonalInfo" class="cabinet-btn profile-form__submit">
                 Зберегти
-            </router-link>
+            </a>
             <router-link :to="{ name: 'user.cabinet.profile' }" class="cabinet-btn profile-form__cancel">
                 Скасувати
             </router-link>
         </div>
 
     </div>
-    <div v-else-if="!user">
+    <div v-else-if="loading">
         <PreloaderComponent></PreloaderComponent>
     </div>
 </template>
@@ -33,11 +37,15 @@
 <script>
 import API from "@/api";
 import PreloaderComponent from "../../PreloaderComponent.vue";
+import IMask from 'imask';
 
 export default {
     data() {
         return {
-            user: null,
+            name: '',
+            phone: '',
+            email: '',
+            loading: true,
         }
     },
 
@@ -53,8 +61,34 @@ export default {
         getUserPersonalInfo() {
             API.get('/api/cabinet/personal-info')
                 .then(res => {
-                    this.user = res.data.data;
+                    this.loading = false
+                    this.name = res.data.data.name;
+                    this.email =  res.data.data.email;
+                    this.phone =  res.data.data.phone.toString();
+                    this.phoneMask();
                 })
+        },
+        updateUserPersonalInfo() {
+            API.post('/api/users/update', {
+                'name': this.name,
+                'phone': this.phone.replace(/[^\d]/g, '').substring(3),
+                'email': this.email,
+            })
+                .then(res => {
+                    console.log(res.data.message);
+                    this.$router.push({name: 'user.cabinet.profile'})
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        },
+        phoneMask() {
+            const maskOptions = {
+                mask: '+{38} (\\000)-000-00-00',
+            };
+            const mask = IMask.createMask(maskOptions);
+            mask.resolve(this.phone);
+            this.phone = mask.value;
         },
     }
 }
