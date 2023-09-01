@@ -16,7 +16,7 @@
                         <tbody>
                         <tr>
                             <td>Телефон:</td>
-                            <td><span class="input-phone">-----</span></td>
+                            <td><span class="input-phone">{{ '+380' + user.phone}}</span></td>
                         </tr>
                         <tr>
                             <td>Електронна пошта:</td>
@@ -24,11 +24,11 @@
                         </tr>
                         <tr>
                             <td>День народження:</td>
-                            <td>------</td>
+                            <td>{{ user.birth ? user.birth : '-' }}</td>
                         </tr>
                         <tr>
                             <td>Стать:</td>
-                            <td>-----</td>
+                            <td>{{ user.sex ? user.sex : '-'}}</td>
                         </tr>
                         </tbody>
                     </table>

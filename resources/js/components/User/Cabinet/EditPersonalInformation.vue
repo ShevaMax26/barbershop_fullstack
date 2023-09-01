@@ -1,27 +1,29 @@
 <template>
-    <div v-if="user" class="profile-info">
-        <table class="profile-info__table">
-            <tbody><tr>
-                <td>Телефон:</td>
-                <td><span class="input-phone">РЕДАГУВАННЯ</span></td>
-            </tr>
-            <tr>
-                <td>Електронна пошта:</td>
-                <td>РЕДАГУВАННЯ</td>
-            </tr>
-            <tr>
-                <td>День народження:</td>
-                <td>РЕДАГУВАННЯ-</td>
-            </tr>
-            <tr>
-                <td>Стать:</td>
-                <td>РЕДАГУВАННЯ</td>
-            </tr>
-            </tbody>
-        </table>
-        <router-link :to="{ name: 'user.cabinet.profile' }" class="cabinet-btn cabinet-content__edit">
-            Скасувати
-        </router-link>
+    <div v-if="user" class="profile-form">
+
+        <div class="profile-form__group">
+            <input type="text" id="name" class="form-input profile-form__input" placeholder=" " :value="user.name">
+            <label for="name" class="profile-form__label">Ім'я</label>
+        </div>
+        <div class="profile-form__group">
+            <input type="tel" id="phone" class="form-input profile-form__input" placeholder=" " :value="user.phone">
+            <label for="phone" class="profile-form__label">Телефон</label>
+        </div>
+        <div class="profile-form__group">
+            <input type="email" id="email" class="form-input profile-form__input" placeholder=" " :value="user.email">
+            <label for="email" class="profile-form__label">Електронна пошта</label>
+        </div>
+
+
+        <div class="profile-form__actions">
+            <router-link :to="{ name: 'user.cabinet.profile' }" class="cabinet-btn profile-form__submit">
+                Зберегти
+            </router-link>
+            <router-link :to="{ name: 'user.cabinet.profile' }" class="cabinet-btn profile-form__cancel">
+                Скасувати
+            </router-link>
+        </div>
+
     </div>
     <div v-else-if="!user">
         <PreloaderComponent></PreloaderComponent>
@@ -31,6 +33,7 @@
 <script>
 import API from "@/api";
 import PreloaderComponent from "../../PreloaderComponent.vue";
+
 export default {
     data() {
         return {
@@ -60,48 +63,82 @@ export default {
 <style lang="scss" scoped>
 @import "/resources/scss/global-cabinet.scss";
 
-.cabinet-content {
+.form-input {
+    display: block;
+    border: 2px solid $gray-light;
+    width: 100%;
+    height: 45px;
+    padding: 8px 10px;
+    background-color: transparent;
+    color: $black;
 
-    &__edit {
-        background-color: rgba(119, 119, 119, 0.9);
-        color: $white;
+    &:focus {
+        border-color: rgba($yellow, 0.2);
+        outline: none;
     }
 }
 
-.profile-info {
+.profile-form {
 
-    &__name {
-        font-size: 18px;
-        margin-bottom: 30px;
-        font-weight: 600;
+    &__group {
+        position: relative;
+        height: 45px;
+        margin-bottom: 20px;
     }
 
-    &__table {
-        width: 100%;
-        border-collapse: collapse;
-        font-weight: 500;
-        word-break: break-word;
+    &__input {
+        font-size: 16px;
+        border-radius: 5px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        outline: none;
+        transition: all 0.16s ease-in;
+    }
 
-        tr:first-child td {
-            padding-top: 0;
-        }
+    &__label {
+        position: absolute;
+        left: 1rem;
+        top: 13px;
+        padding: 0 0.5rem;
+        cursor: text;
+        transition: top 0.2s ease-in,
+        left 0.2s ease-in,
+        font-size 0.2s ease-in;
+        background-color: $white;
+        border-radius: 10px;
+        color: $gray;
+    }
 
-        td {
-            padding: 10px 10px;
-            text-align: left;
-        }
+    &__actions {
+        display: flex;
+        gap: 20px;
+    }
 
-        td:first-child {
-            color: $gray;
-            padding-left: 0;
-            width: 200px;
-            opacity: .8;
-        }
+    &__cancel {
+        background-color: $gray-light;
+        color: $black;
+        width: fit-content;
 
-        td:last-child {
-            padding-right: 0;
-            font-weight: 600;
+        &:hover {
+            background: $white-ingredient;
         }
     }
+
+    &__submit {
+        background-color: $yellow;
+        color: $white;
+        width: fit-content;
+
+        &:hover {
+            background: $yellow-hover;
+        }
+    }
+}
+
+.profile-form__input:focus ~ .profile-form__label,
+.profile-form__input:not(:placeholder-shown).profile-form__input:not(:focus) ~ .profile-form__label {
+    top: -1rem;
+    font-size: 12px;
 }
 </style>
