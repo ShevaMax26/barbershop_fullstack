@@ -33,10 +33,11 @@ Route::group(['middleware' => 'jwt.auth'], function () {
     Route::group(['prefix' => 'cabinet'], function () {
         Route::get('/personal-info', [Cabinet\UserPersonalInfoController::class, 'getPersonalInfo']);
         Route::get('/orders', [Cabinet\UserOrdersController::class, 'getOrders']);
+        Route::post('/update-password', [API\User\UpdateController::class, 'updatePassword']);
     });
 
     Route::group(['prefix' => 'users'], function () {
-        Route::post('/update', API\User\UpdateController::class);
+        Route::post('/update', [API\User\UpdateController::class, 'updatePersonalInfo']);
     });
 });
 

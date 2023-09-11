@@ -10,8 +10,8 @@
             <router-link :to="{ name: 'user.cabinet.message' }" class="cabinet-menu__item" exact
                          :class="{ 'active': $route.name === 'user.cabinet.message' }">Повідомлення
             </router-link>
-            <router-link :to="{ name: 'user.cabinet' }" class="cabinet-menu__item" exact
-                         :class="{ 'active': $route.name === 'user.cabinet' }">Змінити пароль
+            <router-link :to="{ name: 'user.cabinet.editPassword' }" class="cabinet-menu__item" exact
+                         :class="{ 'active': $route.name === 'user.cabinet.editPassword' }">Змінити пароль
             </router-link>
             <a v-if="accessToken" @click.prevent="logout" href="#" class="cabinet-menu__item">
                 <i class="fas fa-sign-out-alt cabinet-menu__item-icon"></i>
@@ -19,7 +19,7 @@
             </a>
             <!-- Додайте інші вкладки за необхідністю -->
         </div>
-        <router-view class="cabinet__content"></router-view>
+        <router-view :key="$route.fullPath" class="cabinet__content"></router-view>
     </section>
 </template>
 

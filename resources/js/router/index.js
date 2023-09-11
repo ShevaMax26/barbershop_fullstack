@@ -27,7 +27,7 @@ const router = createRouter({
                             path: 'edit-profile',
                             name: 'user.cabinet.profile.edit',
                             component: () => import('../components/User/Cabinet/EditPersonalInformation.vue')
-                        }
+                        },
                     ]
                 },
                 {
@@ -40,6 +40,11 @@ const router = createRouter({
                     name: 'user.cabinet.order',
                     component: () => import('../components/User/Cabinet/Orders.vue'),
                 },
+                {
+                    path: 'edit-password',
+                    name: 'user.cabinet.editPassword',
+                    component: () => import('../components/User/Cabinet/EditPassword.vue')
+                }
             ],
         },
         {
