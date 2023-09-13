@@ -19,7 +19,9 @@
                         <input type="password" id="new_password_confirmation" class="form-input profile-form__input" placeholder=" " v-model="newPasswordConfirmation">
                         <label for="new_password_confirmation" class="profile-form__label">Повторіть новий пароль</label>
                     </div>
-                    <div style="font-size: 16px; color: red; margin-bottom: 20px;" v-if="error">{{ error }}</div>
+                    <div style="font-size: 16px; color: red; margin-bottom: 20px;" v-for="(error, field) in errors" :key="field">
+                        {{ error[0] }}
+                    </div>
                     <div class="profile-form__actions">
                         <a @click.prevent="updateUserPersonalInfo" class="cabinet-btn profile-form__submit">
                             Зберегти
@@ -43,7 +45,7 @@ export default {
             oldPassword: '',
             newPassword: '',
             newPasswordConfirmation: '',
-            error: '',
+            errors: '',
         }
     },
 
@@ -55,15 +57,13 @@ export default {
                 'new_password_confirmation': this.newPasswordConfirmation,
             })
                 .then(res => {
-                    if (res) {
-                        localStorage.removeItem('access_token');
+                    if (res.data.access_token) {
                         localStorage.setItem('access_token', res.data.access_token);
-                        this.$router.push({ name: 'user.cabinet.profile' });
                     }
+                    this.$router.push({ name: 'user.cabinet.profile' });
                 })
                 .catch(error => {
-                    console.log(error.response.data);
-                    this.error = error.response.data.error
+                    this.errors = error.response.data.errors
                 })
         },
     }

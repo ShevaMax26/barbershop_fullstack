@@ -19,6 +19,10 @@
             <label for="email" class="profile-form__label">Електронна пошта</label>
         </div>
 
+        <div style="font-size: 16px; color: red; margin-bottom: 20px;" v-for="(error, field) in errors" :key="field">
+            {{ error[0] }}
+        </div>
+
         <div class="profile-form__actions">
             <a @click.prevent="updateUserPersonalInfo" class="cabinet-btn profile-form__submit">
                 Зберегти
@@ -46,6 +50,7 @@ export default {
             phone: '',
             email: '',
             loading: true,
+            errors: '',
         }
     },
 
@@ -75,11 +80,10 @@ export default {
                 'email': this.email,
             })
                 .then(res => {
-                    console.log(res.data.message);
                     this.$router.push({name: 'user.cabinet.profile'})
                 })
                 .catch(error => {
-                    console.log(error);
+                    this.errors = error.response.data.errors
                 })
         },
         phoneMask() {

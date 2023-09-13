@@ -42,7 +42,7 @@ class UpdateController extends Controller
 
             return response()->json(['message' => 'Пароль оновлено успішно', 'access_token' => $token]);
         } else {
-            return response()->json(['error' => 'Старий пароль невірний'], 422);
+            return response()->json(['errors' => ['message' => ['Старий пароль невірний']]], 422);
         }
     }
 
