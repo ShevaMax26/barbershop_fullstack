@@ -31,7 +31,7 @@ class ServiceSeeder extends Seeder
                 'description' => 'ЕКОНОМІЯ 50 грн',
             ],
             [
-                'title' => 'Чоловіча стрижка + стрижка борода',
+                'title' => 'Чоловіча стрижка + стрижка бороди',
                 'description' => 'ЕКОНОМІЯ 50 грн',
             ],
             [

@@ -115,7 +115,7 @@
                                 </td>
                                 <td class="project-state">
                                     <span class="badge badge-warning"
-                                          style="font-size: 16px; height: 30px; width: 75px;">{{ $order->getTotalAmount() }} грн</span>
+                                          style="font-size: 16px; height: 30px; width: 75px;">{{ $order->totalAmount }} грн</span>
                                 </td>
                                 <td>
                                     <a class="btn btn-primary d-flex align-items-center justify-content-center"

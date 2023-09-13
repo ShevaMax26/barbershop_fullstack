@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ManagerPermissionSeeder::class,
             BarberPermissionSeeder::class,
             EmployeeSeeder::class,
+            ServiceDetailSeeder::class,
             UserSeeder::class,
             SuperAdminSeeder::class,
         ]);

@@ -34,15 +34,11 @@
                     </table>
                 </div>
 
-                <div v-else-if="!user">
+                <div v-else-if="!user && !isEditProfileRoute">
                     <PreloaderComponent></PreloaderComponent>
                 </div>
 
                 <router-view></router-view>
-<!--                <div v-else>-->
-<!--                </div>-->
-
-
             </div>
         </div>
     </div>

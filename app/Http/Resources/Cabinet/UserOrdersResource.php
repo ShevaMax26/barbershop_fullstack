@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources\Cabinet;
 
+use App\Http\Resources\Barber\BarberBranchResource;
 use App\Http\Resources\Service\ServiceResource;
+use App\Models\ServiceDetail;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserOrdersResource extends JsonResource
@@ -15,28 +17,16 @@ class UserOrdersResource extends JsonResource
      */
     public function toArray($request)
     {
-        $totalAmount = $this->services->sum(function ($service) {
-            return $service->pivot->price;
-        });
-
         return [
             'id' => $this->id,
-            'employee_id' => $this->employee_id,
-            'date' => $this->date,
-            'start' => $this->start,
-            'end' => $this->end,
+            'employee' => new BarberBranchResource($this->employee),
+            'date' => $this->formattedStartDate,
+            'start' => $this->formattedStartTime,
+            'end' => $this->formattedEndTime,
             'status' => $this->status,
             'services' => ServiceResource::collection($this->services),
-            'service_pivot_data' => $this->whenLoaded('services', function () {
-                return $this->services->map(function ($service) {
-                    return [
-                        'service_id' => $service->id,
-                        'price' => $service->pivot->price,
-                        'duration' => $service->pivot->duration,
-                    ];
-                });
-            }),
-            'total_amount' => $totalAmount,
+            'total_amount' => $this->totalAmount,
+            'total_duration' => $this->formattedTotalDuration,
         ];
     }
 }

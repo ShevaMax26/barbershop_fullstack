@@ -25,7 +25,7 @@ return new class extends Migration
             $table->time('end');
             $table->string('customer_name');
             $table->integer('customer_phone');
-            $table->unsignedSmallInteger('status')->default(1);
+            $table->unsignedSmallInteger('status')->default(1)->comment('1-в очікувані, 2-успішно, 3-скасовано');
             $table->timestamps();
             $table->softDeletes();
         });

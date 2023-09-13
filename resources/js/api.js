@@ -29,7 +29,6 @@ api.interceptors.response.use(response => {
                         'authorization': `Bearer ${accessToken}`
                     }
                 });
-                console.log('Токен прийшов!')
                 localStorage.setItem('access_token', res.data.access_token);
                 error.config.headers.authorization = `Bearer ${res.data.access_token}`;
                 return api.request(error.config);

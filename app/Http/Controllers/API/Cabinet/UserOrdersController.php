@@ -9,8 +9,14 @@ class UserOrdersController extends Controller
 {
     public function getOrders()
     {
-        $orders = auth('api')->user()->orders()->with('services')->get();
+        $pendingOrders = auth('api')->user()->orders()->where('status', 1)->with('services')->get();
+        $paidOrders = auth('api')->user()->orders()->where('status', 2)->with('services')->get();
+        $canceledOrders = auth('api')->user()->orders()->where('status', 3)->with('services')->get();
 
-        return UserOrdersResource::collection($orders);
+        return [
+            'pendingOrders' => UserOrdersResource::collection($pendingOrders),
+            'paidOrders' => UserOrdersResource::collection($paidOrders),
+            'canceledOrders' => UserOrdersResource::collection($canceledOrders),
+        ];
     }
 }
