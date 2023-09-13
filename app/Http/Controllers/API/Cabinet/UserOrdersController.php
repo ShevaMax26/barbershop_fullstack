@@ -9,9 +9,16 @@ class UserOrdersController extends Controller
 {
     public function getOrders()
     {
-        $pendingOrders = auth('api')->user()->orders()->where('status', 1)->with('services')->get();
-        $paidOrders = auth('api')->user()->orders()->where('status', 2)->with('services')->get();
-        $canceledOrders = auth('api')->user()->orders()->where('status', 3)->with('services')->get();
+        $user = auth('api')->user();
+
+        $orders = $user->orders()
+            ->whereIn('status', [1, 2, 3])
+            ->with('services', 'employee.rank')
+            ->get();
+
+        $pendingOrders = $orders->where('status', 1);
+        $paidOrders = $orders->where('status', 2);
+        $canceledOrders = $orders->where('status', 3);
 
         return [
             'pendingOrders' => UserOrdersResource::collection($pendingOrders),
